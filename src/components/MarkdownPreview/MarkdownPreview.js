@@ -5,7 +5,12 @@ function MarkdownPreview() {
   const [value, setValue] = useState("**Hello world!!!**");
   return (
     <div className="container">
-      <MDEditor value={value} onChange={setValue} />
+      <MDEditor
+        value={value}
+        onChange={setValue}
+        height={window.innerHeight - 52}
+        visiableDragbar={false}
+      />
       {/* <MDEditor.Markdown source={value} /> */}
     </div>
   );
