@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = () => {
   return (
     <div className="flex max-w-sm mx-auto my-auto overflow-hidden bg-white rounded-lg shadow-lg top- dark:bg-gray-800 lg:max-w-4xl">
@@ -104,12 +106,16 @@ const Login = () => {
         <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-          <a
-            href="#"
+          <Link
             className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+            to="/signup"
           >
             or sign up
-          </a>
+          </Link>
+          {/* <a
+            href="#"
+            className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+          ></a> */}
 
           <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
         </div>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const SignUp = () => {
   return (
     <div class="bg-white dark:bg-gray-800 w-full max-w-sm rounded-lg shadow-md overflow-hidden mx-auto">
@@ -56,12 +58,13 @@ const SignUp = () => {
           Don't have an account?{" "}
         </span>
 
-        <a
-          href="#"
+        <Link
           class="text-blue-600 dark:text-blue-400 font-bold mx-2 text-sm hover:text-blue-500"
+          to="/login"
         >
           Register
-        </a>
+        </Link>
+
       </div>
     </div>
   );
