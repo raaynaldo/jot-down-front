@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="flex max-w-sm mx-auto my-auto overflow-hidden bg-white rounded-lg shadow-lg top- dark:bg-gray-800 lg:max-w-4xl">
+    <div className="flex max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
       <div
         className="hidden bg-cover lg:block lg:w-1/2"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1602610411365-76e8c2a88e18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80')",
+            "url('https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/e35/47693090_103280924047425_7892425407428422558_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=109&_nc_ohc=nQF3FsdVBbUAX-qom7O&tp=1&oh=18a6488da290c047e5f6c9ff1a32ed1e&oe=60297C0B')",
         }}
       ></div>
 
@@ -54,7 +54,7 @@ const Login = () => {
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
 
           <a
-            href="#"
+            // href="#"
             className="text-xs text-center text-gray-500 uppercase dark:text-gray-400 hover:underline"
           >
             or login with email
@@ -66,7 +66,7 @@ const Login = () => {
         <div className="mt-4">
           <label
             className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
-            for="LoggingEmailAddress"
+            // for="LoggingEmailAddress"
           >
             Email Address
           </label>
@@ -82,12 +82,12 @@ const Login = () => {
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
               Password
             </label>
-            <a
+            {/* <a
               href="#"
               className="text-xs text-gray-500 dark:text-gray-300 hover:underline"
             >
               Forget Password?
-            </a>
+            </a> */}
           </div>
 
           <input
@@ -112,10 +112,6 @@ const Login = () => {
           >
             or sign up
           </Link>
-          {/* <a
-            href="#"
-            className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-          ></a> */}
 
           <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
         </div>
