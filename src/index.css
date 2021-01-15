@@ -25,7 +25,11 @@ h3 {
 }
 
 .btn {
-  @apply inline-block bg-blue-200 px-8 py-4 rounded-md;
+  @apply inline-block px-8 py-4 bg-blue-200 rounded-md;
+}
+
+.text-error{
+  @apply mt-1 text-xs font-medium tracking-wide text-red-500;
 }
 
 button:focus{
