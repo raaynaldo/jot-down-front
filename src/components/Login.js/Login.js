@@ -16,28 +16,29 @@ const Login = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    login({ user: data });
   };
   return (
     // <div className="flex items-center h-screen">
-      <div className="flex flex-auto max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg h-3/4 dark:bg-gray-800 lg:max-w-4xl">
-        <div
-          className="hidden bg-cover lg:block lg:w-1/2"
-          style={{
-            backgroundImage:
-              "url('https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/e35/47693090_103280924047425_7892425407428422558_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=109&_nc_ohc=nQF3FsdVBbUAX-qom7O&tp=1&oh=18a6488da290c047e5f6c9ff1a32ed1e&oe=60297C0B')",
-          }}
-        ></div>
+    <div className="flex flex-auto max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg h-3/4 dark:bg-gray-800 lg:max-w-4xl">
+      <div
+        className="hidden bg-cover lg:block lg:w-1/2"
+        style={{
+          backgroundImage:
+            "url('https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/e35/47693090_103280924047425_7892425407428422558_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=109&_nc_ohc=nQF3FsdVBbUAX-qom7O&tp=1&oh=18a6488da290c047e5f6c9ff1a32ed1e&oe=60297C0B')",
+        }}
+      ></div>
 
-        <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-          <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white">
-            Jot Down
-          </h2>
+      <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
+        <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white">
+          Jot Down
+        </h2>
 
-          <p className="text-xl text-center text-gray-600 dark:text-gray-200">
-            Welcome back!
-          </p>
+        <p className="text-xl text-center text-gray-600 dark:text-gray-200">
+          Welcome back!
+        </p>
 
-          {/* <a
+        {/* <a
             href="#"
             className="flex items-center justify-center mt-4 text-gray-600 rounded-lg shadow-md dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
           >
@@ -80,65 +81,65 @@ const Login = (props) => {
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div> */}
 
-          <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <div className="mt-4">
-              <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
-                Username
-              </label>
-              <input
-                id="LoggingEmailAddress"
-                className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                type="username"
-                name="username"
-                ref={register({ required: true })}
-              />
-              {errors.username && (
-                <p className="text-error">Username is required</p>
-              )}
-            </div>
-
-            <div className="mt-4">
-              <div className="flex justify-between">
-                <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
-                  Password
-                </label>
-              </div>
-
-              <input
-                id="loggingPassword"
-                className="block w-full px-4 py-2 text-gray-700 border border-gray-300 rounded bg-wbg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                name="password"
-                type="password"
-                ref={register({ required: true })}
-              />
-              {errors.password && (
-                <p className="text-error">Password is required</p>
-              )}
-            </div>
-
-            <div className="mt-8">
-              <button
-                type="submit"
-                className="w-full px-4 py-2 tracking-wide text-white bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-              >
-                Login
-              </button>
-            </div>
-          </form>
-          <div className="flex items-center justify-between mt-4">
-            <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-
-            <Link
-              className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-              to="/signup"
-            >
-              or sign up
-            </Link>
-
-            <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-4">
+            <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
+              Username
+            </label>
+            <input
+              id="LoggingEmailAddress"
+              className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              type="username"
+              name="username"
+              ref={register({ required: true })}
+            />
+            {errors.username && (
+              <p className="text-error">Username is required</p>
+            )}
           </div>
+
+          <div className="mt-4">
+            <div className="flex justify-between">
+              <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
+                Password
+              </label>
+            </div>
+
+            <input
+              id="loggingPassword"
+              className="block w-full px-4 py-2 text-gray-700 border border-gray-300 rounded bg-wbg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              name="password"
+              type="password"
+              ref={register({ required: true })}
+            />
+            {errors.password && (
+              <p className="text-error">Password is required</p>
+            )}
+          </div>
+
+          <div className="mt-8">
+            <button
+              type="submit"
+              className="w-full px-4 py-2 tracking-wide text-white bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+        <div className="flex items-center justify-between mt-4">
+          <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+
+          <Link
+            className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+            to="/signup"
+          >
+            or sign up
+          </Link>
+
+          <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
         </div>
       </div>
+    </div>
     // </div>
   );
 };
