@@ -1,26 +1,35 @@
-import { useState } from "react";
-import Navbar from "./components/Navbar/Navbar";
-import Main from "./containers/Main/Main";
+import { useState, useEffect, useContext } from "react";
+import Home from "./containers/Home/Home";
+import PrivateRoute from "./PrivateRoute";
 import Login from "./components/Login.js/Login";
 import SignUp from "./components/SignUp/SignUp";
 import { Switch, Route } from "react-router-dom";
 import DarkModeButton from "./components/DarkModeButton/DarkModeButton";
+import AuthContext from "./context/auth/authContext";
 
 const App = () => {
   const isColorSchemeDark = window.matchMedia("(prefers-color-scheme: dark)")
     .matches;
   const [isDark, setIsDark] = useState(isColorSchemeDark);
 
+  const authContext = useContext(AuthContext);
+  const { loadUser } = authContext;
+  useEffect(() => {
+    loadUser();
+  }, []);
+
   return (
     <div className={isDark ? "dark" : ""}>
-      <div className="h-screen bg-white dark:bg-gray-900">
+      <div className="flex items-center justify-center h-screen bg-gray-50 dark:bg-gray-900">
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/" exact>
+          <Route path="/" exact component={Home} />
+          {/* <PrivateRoute path="/" exact component={Home} /> */}
+          {/* <Route path="/" exact>
             <Navbar></Navbar>
             <Main></Main>
-          </Route>
+          </Route> */}
         </Switch>
         <DarkModeButton setIsDark={setIsDark} isDark={isDark} />
       </div>

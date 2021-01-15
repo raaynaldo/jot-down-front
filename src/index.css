@@ -32,6 +32,14 @@ h3 {
   @apply mt-1 text-xs font-medium tracking-wide text-red-500;
 }
 
+.w-md-editor-preview {
+  @apply dark:text-gray-300 dark:bg-gray-800
+}
+
+.w-md-editor-editor-pre span{
+  @apply dark:text-gray-300 dark:bg-gray-800
+}
+
 button:focus{
   outline: none;
 }

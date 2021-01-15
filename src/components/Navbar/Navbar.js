@@ -15,13 +15,13 @@ const Navbar = () => {
       <div>
         <button
           type="button"
-          class="flex items-center focus:outline-none"
+          className="flex items-center focus:outline-none"
           aria-label="toggle profile dropdown"
         >
-          <div class="h-8 w-8 overflow-hidden rounded-full border-2  border-gray-400">
+          <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
             <img
               src="https://lh3.googleusercontent.com/a-/AOh14Gi0DgItGDTATTFV6lPiVrqtja6RZ_qrY91zg42o-g"
-              class="h-full w-full object-cover"
+              className="object-cover w-full h-full"
               alt="avatar"
             />
           </div>

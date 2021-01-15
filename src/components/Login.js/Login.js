@@ -1,14 +1,25 @@
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import AuthContext from "../../context/auth/authContext";
 
-const Login = () => {
+const Login = (props) => {
+  const authContext = useContext(AuthContext);
+  const { login, validation, clearErrors, isAuthenticated } = authContext;
+  useEffect(() => {
+    clearErrors();
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+  }, [isAuthenticated, props.history]);
+
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
   };
   return (
-    // <div className="flex items-center justify-center">
-      <div className="flex max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
+    // <div className="flex items-center h-screen">
+      <div className="flex flex-auto max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg h-3/4 dark:bg-gray-800 lg:max-w-4xl">
         <div
           className="hidden bg-cover lg:block lg:w-1/2"
           style={{
@@ -26,7 +37,7 @@ const Login = () => {
             Welcome back!
           </p>
 
-          <a
+          {/* <a
             href="#"
             className="flex items-center justify-center mt-4 text-gray-600 rounded-lg shadow-md dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
           >
@@ -67,7 +78,7 @@ const Login = () => {
             </a>
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
-          </div>
+          </div> */}
 
           <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div className="mt-4">

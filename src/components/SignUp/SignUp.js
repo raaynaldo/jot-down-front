@@ -2,67 +2,67 @@ import { Link } from "react-router-dom";
 
 const SignUp = () => {
   return (
-    <div class="bg-white dark:bg-gray-800 w-full max-w-sm rounded-lg shadow-md overflow-hidden mx-auto">
-      <div class="py-4 px-6">
-        <h2 class="text-center font-bold text-gray-700 dark:text-white text-3xl">
-          Brand
+    <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <div className="px-6 py-4">
+        <h2 className="text-3xl font-bold text-center text-gray-700 dark:text-white">
+          Jot Down
         </h2>
 
-        <h3 class="mt-1 text-center font-medium text-gray-600 dark:text-gray-200 text-xl">
+        <h3 className="mt-1 text-xl font-medium text-center text-gray-600 dark:text-gray-200">
           Welcome Back
         </h3>
 
-        <p class="mt-1 text-center text-gray-500 dark:text-gray-400">
-          Login or create account
+        <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
+          Create account
         </p>
 
         <form>
-          <div class="mt-4 w-full">
+          <div className="w-full mt-4">
             <input
-              class="w-full mt-2 py-2 px-4 bg-white dark:bg-gray-800 text-gray-700 border border-gray-300 dark:border-gray-600 rounded block placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               type="email"
               placeholder="Email Address"
               aria-label="Email Address"
             />
           </div>
 
-          <div class="mt-4 w-full">
+          <div className="w-full mt-4">
             <input
-              class="w-full mt-2 py-2 px-4 bg-white dark:bg-gray-800 text-gray-700 border border-gray-300 dark:border-gray-600 rounded block placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border border-gray-300 rounded dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               type="password"
               placeholder="Password"
               aria-label="Password"
             />
           </div>
 
-          <div class="flex justify-between items-center mt-4">
+          <div className="flex items-center justify-between mt-4">
             <a
               href="#"
-              class="text-gray-600 dark:text-gray-200 text-sm hover:text-gray-500"
+              className="text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500"
             >
               Forget Password?
             </a>
 
             <button
-              class="py-2 px-4 bg-gray-700 text-white rounded hover:bg-gray-600 focus:outline-none"
+              className="px-4 py-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
               type="button"
             >
-              Login
+              Sign Up
             </button>
           </div>
         </form>
       </div>
 
-      <div class="flex items-center justify-center py-4 bg-gray-100 dark:bg-gray-700 text-center">
-        <span class="text-gray-600 dark:text-gray-200 text-sm">
-          Don't have an account?{" "}
+      <div className="flex items-center justify-center py-4 text-center bg-gray-100 dark:bg-gray-700">
+        <span className="text-sm text-gray-600 dark:text-gray-200">
+          Already have an account?{" "}
         </span>
 
         <Link
-          class="text-blue-600 dark:text-blue-400 font-bold mx-2 text-sm hover:text-blue-500"
+          className="mx-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500"
           to="/login"
         >
-          Register
+          Login
         </Link>
 
       </div>

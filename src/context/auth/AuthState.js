@@ -80,7 +80,7 @@ const AuthState = (props) => {
     }
   };
 
-  const updateUser = async(formData) => {
+  const updateUser = async (formData) => {
     const config = {
       "Content-Type": "application/json",
     };
@@ -97,7 +97,7 @@ const AuthState = (props) => {
       //   payload: error.response.data.errors,
       // });
     }
-  }
+  };
 
   // Logout
   const logout = () => dispatch({ type: LOGOUT });
@@ -119,7 +119,7 @@ const AuthState = (props) => {
         login,
         logout,
         clearErrors,
-        updateUser
+        updateUser,
       }}
     >
       {props.children}

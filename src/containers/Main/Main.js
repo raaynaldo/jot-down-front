@@ -8,7 +8,7 @@ const Main = () => {
 
   return (
     <div className="flex flex-row main__container">
-      <div className="w-40 fixed h-full top-12 bg-gray-900 text-white items-left px-5 pt-4 space-y-3">
+      <div className="fixed w-40 h-full px-5 pt-4 space-y-3 text-white bg-gray-900 top-12 items-left">
         <div>Notes</div>
         <div>Folder A</div>
         <div>Folder B</div>
@@ -22,17 +22,22 @@ const Main = () => {
         } bg-gray-200 flex flex-col pt-4`}
       >
         <div className="flex flex-row items-center space-x-2 ">
-            <button className='bg-gray-300 border-black py-2' onClick={() => setOpened((prev) => setOpened(!prev))}>
-              <FaCaretRight className={`${!opened ? 'transform rotate-180' : ''}`} />
-            </button>
+          <button
+            className="py-2 bg-gray-300 border-black"
+            onClick={() => setOpened((prev) => setOpened(!prev))}
+          >
+            <FaCaretRight
+              className={`${!opened ? "transform rotate-180" : ""}`}
+            />
+          </button>
           <div className="relative text-gray-900 ">
             <input
               type="search"
               name="serch"
               placeholder="Search"
-              className="bg-white h-10 px-5 rounded-full text-sm focus:outline-none"
+              className="h-10 px-5 text-sm bg-white rounded-full focus:outline-none"
             />
-            <button type="button" className="absolute right-0 top-0 mt-3 mr-4">
+            <button type="button" className="absolute top-0 right-0 mt-3 mr-4">
               <FaSearch />
             </button>
           </div>
@@ -43,56 +48,56 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="mt-4 h-full w-64 space-y-2 overflow-y-auto">
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+        <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
             </p>
           </div>
-          <div className="flex flex-col bg-red-500 h-20 px-5 py-3 space-y-1">
+          <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
             <b>React Router DOM</b>
             <p className="text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit...
