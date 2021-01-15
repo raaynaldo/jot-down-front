@@ -26,10 +26,6 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           {/* <Route path="/" exact component={Home} /> */}
           <PrivateRoute path="/" exact component={Home} />
-          {/* <Route path="/" exact>
-            <Navbar></Navbar>
-            <Main></Main>
-          </Route> */}
         </Switch>
         <DarkModeButton setIsDark={setIsDark} isDark={isDark} />
       </div>
