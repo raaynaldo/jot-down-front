@@ -9,7 +9,7 @@ const Note = ({ title, body, onClick }) => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit...
       </p> */}
       <b>{title}</b>
-      <p className="text-xs">{body}</p>
+      <p className="text-xs">{body.slice(0, 65)}...</p>
     </div>
   );
 };

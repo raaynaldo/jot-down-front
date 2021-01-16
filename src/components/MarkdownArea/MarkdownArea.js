@@ -12,11 +12,10 @@ function MarkdownArea() {
     ["note", note.id],
     () => getNote(note.id),
     {
-      enabled: !note.isLoading,
+      enabled: note.id !== 0,
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
-        console.log({ data });
-        setValue(data?.body);
+        setValue(data.body);
       },
     }
   );

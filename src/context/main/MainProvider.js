@@ -3,7 +3,7 @@ import MainContext from "./mainContext";
 import { FOLDER_TYPES } from "../../constant";
 
 const MainProvider = (props) => {
-  const [note, setNote] = useState({ id: 0 });
+  const [note, setNote] = useState({ id: 0, isLoading: true });
   const [folder, setFolder] = useState({
     id: 0,
     type: FOLDER_TYPES.folder,
@@ -11,7 +11,6 @@ const MainProvider = (props) => {
   });
 
   const updateNote = (data) => {
-      console.log(data)
     setNote({
       ...note,
       ...data,
