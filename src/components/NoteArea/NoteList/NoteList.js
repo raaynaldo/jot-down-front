@@ -6,17 +6,17 @@ import Loader from "react-loader-spinner";
 import MainContext from "../../../context/main/mainContext";
 
 const NoteList = () => {
-  const { folderId } = useContext(MainContext);
+  const { folder } = useContext(MainContext);
   //   const notes = new Array(12).fill({
   //     title: "Hello, this is Title",
   //     body: "this is Body",
   //   });
 
   const { data, error, isLoading, isError } = useQuery(
-    ["notes", folderId],
-    () => getAllNotesByFolderId(folderId),
+    ["notes", folder.id],
+    () => getAllNotesByFolderId(folder.id),
     {
-      enabled: folderId !== 0,
+      enabled: !folder.isLoading,
       refetchOnWindowFocus: false,
     }
   );
