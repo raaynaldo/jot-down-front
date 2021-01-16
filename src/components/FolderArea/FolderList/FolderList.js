@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Folder from "./Folder/Folder";
 import MainContext from "../../../context/main/mainContext";
 import { FOLDER_TYPES } from "../../../constant";
@@ -50,10 +50,16 @@ const FolderList = () => {
           }
         />
       ))}
-      <div onClick={() => updateFolder({ type: FOLDER_TYPES.archived })}>
+      <div
+        className="cursor-pointer"
+        onClick={() => updateFolder({ type: FOLDER_TYPES.archived })}
+      >
         Archived
       </div>
-      <div onClick={() => updateFolder({ type: FOLDER_TYPES.trash })}>
+      <div
+        className="cursor-pointer"
+        onClick={() => updateFolder({ type: FOLDER_TYPES.trash })}
+      >
         Trash
       </div>
     </div>

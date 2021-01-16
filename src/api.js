@@ -19,16 +19,14 @@ export const getAllTags = async () => {
   }
 };
 
-export const getAllNotesByFolderId = async (id, type) => {
+export const getAllNotesByFolderId = async (type, id) => {
   try {
-    let route = "";
-    if (type === FOLDER_TYPES.folder) {
-      route = "/get_notes_by_folder/" + id;
-    } else if (type === FOLDER_TYPES.archived) {
+    let route = "/get_notes_by_folder/" + id;
+    if (type === FOLDER_TYPES.archived) {
       route = "/get_notes_in_archived/";
     } else if (type === FOLDER_TYPES.trash) {
       route = "/get_notes_in_trash/";
-    } else if (type === FOLDER_TYPES.tags) {
+    } else if (type === FOLDER_TYPES.tag) {
       route = "/get_notes_by_tag/" + id;
     }
     const response = await axios.get(route);
