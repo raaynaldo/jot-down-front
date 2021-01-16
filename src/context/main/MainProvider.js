@@ -3,12 +3,20 @@ import MainContext from "./mainContext";
 import { FOLDER_TYPES } from "../../constant";
 
 const MainProvider = (props) => {
-  const [noteId, setNoteId] = useState(0);
+  const [note, setNote] = useState({ id: 0 });
   const [folder, setFolder] = useState({
     id: 0,
     type: FOLDER_TYPES.folder,
     isLoading: true,
   });
+
+  const updateNote = (data) => {
+      console.log(data)
+    setNote({
+      ...note,
+      ...data,
+    });
+  };
 
   const updateFolder = (data) => {
     setFolder({
@@ -18,7 +26,9 @@ const MainProvider = (props) => {
   };
 
   return (
-    <MainContext.Provider value={{ noteId, folder, setNoteId, updateFolder }}>
+    <MainContext.Provider
+      value={{ note, folder, setNote, updateFolder, updateNote }}
+    >
       {props.children}
     </MainContext.Provider>
   );

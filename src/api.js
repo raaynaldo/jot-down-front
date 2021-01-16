@@ -35,3 +35,12 @@ export const getAllNotesByFolderId = async (type, id) => {
     return error.response.message;
   }
 };
+
+export const getNote = async (id) => {
+  try {
+    const response = await axios.get("/get_note/" + id);
+    return response.data.note;
+  } catch (error) {
+    return error.response.message;
+  }
+};

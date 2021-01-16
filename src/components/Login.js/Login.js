@@ -1,11 +1,11 @@
-import { useEffect, useContext, createContext } from "react";
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import AuthContext from "../../context/auth/authContext";
 
 const Login = (props) => {
   const authContext = useContext(AuthContext);
-  const { login, validation, clearErrors, isAuthenticated } = authContext;
+  const { login, clearErrors, isAuthenticated } = authContext;
   useEffect(() => {
     clearErrors();
     if (isAuthenticated) {
