@@ -1,5 +1,6 @@
 import { FaSearch, FaPencilAlt, FaCaretRight } from "react-icons/fa";
 import { useState } from "react";
+import NoteList from "./NoteList/NoteList";
 
 const NoteSideBar = () => {
   const [opened, setOpened] = useState(true);
@@ -34,62 +35,7 @@ const NoteSideBar = () => {
         </div>
       </div>
 
-      <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-        <div className="flex flex-col h-20 px-5 py-3 space-y-1 bg-red-500">
-          <b>React Router DOM</b>
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </p>
-        </div>
-      </div>
+      <NoteList/>
     </div>
   );
 };

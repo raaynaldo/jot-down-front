@@ -3,7 +3,7 @@ import Home from "./containers/Home/Home";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./components/Login.js/Login";
 import SignUp from "./components/SignUp/SignUp";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import DarkModeButton from "./components/DarkModeButton/DarkModeButton";
 import AuthContext from "./context/auth/authContext";
 
@@ -26,6 +26,7 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           {/* <Route path="/" exact component={Home} /> */}
           <PrivateRoute path="/" exact component={Home} />
+          <Route path="*" render={() => <Redirect to="/" />} />
         </Switch>
         <DarkModeButton setIsDark={setIsDark} isDark={isDark} />
       </div>
