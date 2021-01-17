@@ -11,9 +11,9 @@ const App = () => {
   const isColorSchemeDark = window.matchMedia("(prefers-color-scheme: dark)")
     .matches;
   const [isDark, setIsDark] = useState(isColorSchemeDark);
+
   const authContext = useContext(AuthContext);
   const { loadUser } = authContext;
-
   useEffect(() => {
     loadUser();
   }, []);

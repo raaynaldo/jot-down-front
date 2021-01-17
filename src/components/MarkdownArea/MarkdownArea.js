@@ -4,6 +4,7 @@ import MainContext from "../../context/main/mainContext";
 import { getNote } from "../../api";
 import Loader from "react-loader-spinner";
 import MDEditor from "@uiw/react-md-editor";
+import "./MarkdownArea.css";
 
 function MarkdownArea() {
   const [value, setValue] = useState("**Hello world!!!**");
@@ -23,7 +24,9 @@ function MarkdownArea() {
   if (isLoading) {
     return (
       <>
-        <Loader type="ThreeDots" color="#ccc" height={5} />
+        <div className="flex-auto">
+            <Loader type="ThreeDots" color="#ccc" height={10} className="flex items-center justify-center flex-1"/>
+        </div>
       </>
     );
   }
@@ -32,18 +35,21 @@ function MarkdownArea() {
     return <span>Error: {error.message}</span>;
   }
 
-  return (
-    <div className="flex-auto bg-blue-200">
-      <div className="container">
+  return note.id !== 0 ? (
+    <div className="flex-auto">
+      {/* <input onChange={(e) => setValue(e.target.value)} /> */}
+      <div className="Container">
         <MDEditor
           value={value}
           onChange={setValue}
-          height={window.innerHeight - 52}
+          // height={window.innerHeight - 48}
           visiableDragbar={false}
+          autoFocus={false}
         />
-        {/* <MDEditor.Markdown source={value} /> */}
       </div>
     </div>
+  ) : (
+    <div className="flex-auto bg-gray-300 svg dark:bg-gray-700"></div>
   );
 }
 

@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
 
 const FolderList = () => {
-  const { updateFolder, folder } = useContext(MainContext);
+  const { updateNote, updateFolder, folder } = useContext(MainContext);
 
   const { data, error, isLoading, isError } = useQuery(
     "folders",
@@ -45,20 +45,27 @@ const FolderList = () => {
         <Folder
           key={idx}
           name={folder.name}
-          onClick={() =>
-            updateFolder({ id: folder.id, type: FOLDER_TYPES.folder })
-          }
+          onClick={() => {
+            updateFolder({ id: folder.id, type: FOLDER_TYPES.folder });
+            updateNote({ id: 0 });
+          }}
         />
       ))}
       <div
         className="cursor-pointer"
-        onClick={() => updateFolder({ type: FOLDER_TYPES.archived })}
+        onClick={() => {
+          updateFolder({ id: folder.id, type: FOLDER_TYPES.archived });
+          updateNote({ id: 0 });
+        }}
       >
         Archived
       </div>
       <div
         className="cursor-pointer"
-        onClick={() => updateFolder({ type: FOLDER_TYPES.trash })}
+        onClick={() => {
+          updateFolder({ id: folder.id, type: FOLDER_TYPES.tag });
+          updateNote({ id: 0 });
+        }}
       >
         Trash
       </div>
