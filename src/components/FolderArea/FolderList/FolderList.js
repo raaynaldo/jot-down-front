@@ -47,7 +47,7 @@ const FolderList = () => {
           name={folder.name}
           onClick={() => {
             updateFolder({ id: folder.id, type: FOLDER_TYPES.folder });
-            updateNote({ id: 0 });
+            updateNote({ id: 0, isLoading: false, dataLoaded: false });
           }}
         />
       ))}
@@ -55,7 +55,7 @@ const FolderList = () => {
         className="cursor-pointer"
         onClick={() => {
           updateFolder({ id: folder.id, type: FOLDER_TYPES.archived });
-          updateNote({ id: 0 });
+          updateNote({ id: 0, isLoading: false, dataLoaded: false });
         }}
       >
         Archived
@@ -63,8 +63,8 @@ const FolderList = () => {
       <div
         className="cursor-pointer"
         onClick={() => {
-          updateFolder({ id: folder.id, type: FOLDER_TYPES.tag });
-          updateNote({ id: 0 });
+          updateFolder({ id: folder.id, type: FOLDER_TYPES.trash });
+          updateNote({ id: 0, isLoading: false, dataLoaded: false });
         }}
       >
         Trash

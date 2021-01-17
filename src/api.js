@@ -44,3 +44,15 @@ export const getNote = async (id) => {
     return error.response.message;
   }
 };
+
+export const saveNote = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    await axios.post("/save_note", data, config);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};

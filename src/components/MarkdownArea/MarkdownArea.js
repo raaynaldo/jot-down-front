@@ -1,19 +1,19 @@
-import { useState, useContext } from "react";
-import { useQuery } from "react-query";
+import { useState, useContext, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import MainContext from "../../context/main/mainContext";
-import { getNote } from "../../api";
+import { getNote, saveNote } from "../../api";
 import Loader from "react-loader-spinner";
 import MDEditor from "@uiw/react-md-editor";
 import "./MarkdownArea.css";
 
 function MarkdownArea() {
-  const [value, setValue] = useState("**Hello world!!!**");
-  const { note } = useContext(MainContext);
-  const { data, error, isLoading, isError } = useQuery(
+  const [value, setValue] = useState("");
+  const { note, updateNote, folder } = useContext(MainContext);
+  const { error, isLoading: isLoadingQuery, isError } = useQuery(
     ["note", note.id],
     () => getNote(note.id),
     {
-      enabled: note.id !== 0,
+      enabled: !note.isLoading && note.id !== 0,
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
         setValue(data.body);
@@ -21,11 +21,48 @@ function MarkdownArea() {
     }
   );
 
-  if (isLoading) {
+  const [time, setTime] = useState(null);
+  const [saved, setSaved] = useState(false);
+
+  const resetTimeout = (id, newID) => {
+    clearTimeout(id);
+    return newID;
+  };
+
+  const handleChange = (newValue) => {
+    if (note.dataLoaded) {
+      const newTimer = setTimeout(updateNoteToBack, 3000);
+      setTime(resetTimeout(time, newTimer));
+      setValue(newValue);
+    } else {
+      updateNote({ dataLoaded: true });
+    }
+  };
+
+  const { mutateAsync, isLoading: isLoadingMutate } = useMutation(() =>
+    saveNote({ note: { id: note.id, body: value } })
+  );
+  const queryClient = useQueryClient();
+  const updateNoteToBack = async () => {
+    setSaved(true);
+    //save todb
+    await mutateAsync();
+    // queryClient.invalidateQueries(["note", note.id]);
+    queryClient.invalidateQueries(["notes", folder.type, folder.id]);
+    setSaved(false);
+    // setTimeout(() => setSaved(false), 1000);
+  };
+
+  if (isLoadingQuery) {
     return (
       <>
         <div className="flex-auto">
-            <Loader type="ThreeDots" color="#ccc" height={10} className="flex items-center justify-center flex-1"/>
+          <Loader
+            type="ThreeDots"
+            color="#ccc"
+            height={10}
+            className="flex items-center justify-center flex-1"
+          />
         </div>
       </>
     );
@@ -37,11 +74,12 @@ function MarkdownArea() {
 
   return note.id !== 0 ? (
     <div className="flex-auto">
-      {/* <input onChange={(e) => setValue(e.target.value)} /> */}
+      {/* <h1>{saved}</h1> */}
+      <h1 className="text-red-50">{saved ? "saved" : ""}</h1>
       <div className="Container">
         <MDEditor
           value={value}
-          onChange={setValue}
+          onChange={handleChange}
           // height={window.innerHeight - 48}
           visiableDragbar={false}
           autoFocus={false}

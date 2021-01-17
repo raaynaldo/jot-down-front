@@ -1,15 +1,3 @@
-/* .CodeMirror{
-    height: calc(100vh - 3rem) !important;
-}
-
-.w-md-editor-aree{
-    display: none;
-}
-
-.w-md-editor-preview{
-    width: 100%;
-} */
-
 .w-md-editor {
   height: calc(100vh - 3rem) !important;
 }

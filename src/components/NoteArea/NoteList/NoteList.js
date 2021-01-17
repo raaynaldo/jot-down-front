@@ -40,7 +40,10 @@ const NoteList = () => {
           key={idx}
           title={note.title}
           body={note.body}
-          onClick={() => updateNote({ id: note.id })}
+          onClick={() => {
+            updateNote({ id: note.id, isLoading: false, dataLoaded: false });
+            console.log(note.id);
+          }}
         />
       ))}
     </div>
