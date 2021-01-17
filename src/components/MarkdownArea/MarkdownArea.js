@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import MainContext from "../../context/main/mainContext";
 import { getNote, saveNote } from "../../api";
@@ -56,12 +56,12 @@ function MarkdownArea() {
   if (isLoadingQuery) {
     return (
       <>
-        <div className="flex-auto">
+        <div className="flex-auto bg-gray-300 svg dark:bg-gray-700">
           <Loader
             type="ThreeDots"
-            color="#ccc"
-            height={10}
-            className="flex items-center justify-center flex-1"
+            color="#ee4540"
+            height={15}
+            className="flex items-center justify-center flex-1 h-full"
           />
         </div>
       </>

@@ -3,16 +3,16 @@ import MainContext from "./mainContext";
 import { FOLDER_TYPES } from "../../constant";
 
 const MainProvider = (props) => {
-  const [note, setNote] = useState({ id: 0, isLoading: true, dataLoaded: false });
+  const [activeNote, setActiveNote] = useState({ id: 0, isLoading: true, dataLoaded: false });
   const [folder, setFolder] = useState({
     id: 0,
     type: FOLDER_TYPES.folder,
     isLoading: true,
   });
 
-  const updateNote = (data) => {
-    setNote({
-      ...note,
+  const updateactiveNote = (data) => {
+    setActiveNote({
+      ...activeNote,
       ...data,
     });
   };
@@ -26,7 +26,7 @@ const MainProvider = (props) => {
 
   return (
     <MainContext.Provider
-      value={{ note, folder, updateFolder, updateNote }}
+      value={{ activeNote, folder, updateFolder, updateactiveNote }}
     >
       {props.children}
     </MainContext.Provider>

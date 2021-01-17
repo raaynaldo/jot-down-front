@@ -1,4 +1,9 @@
+import removeMd from "remove-markdown";
+
 const Note = ({ title, body, onClick }) => {
+  const titleSlice = removeMd(title).slice(0, 21);
+  const bodySlice = removeMd(body).slice(0, 65);
+
   return (
     <div
       className="flex flex-col h-20 px-5 py-3 space-y-1 text-red-500 bg-gray-100"
@@ -8,8 +13,10 @@ const Note = ({ title, body, onClick }) => {
       <p className="text-xs">
         Lorem ipsum dolor sit amet consectetur adipisicing elit...
       </p> */}
-      <b>{title}</b>
-      <p className="text-xs">{body.slice(0, 65)}...</p>
+      <b>{titleSlice + (titleSlice.length > 20 ? "..." : "")}</b>
+      <p className="text-xs">
+        {bodySlice + (bodySlice.length > 64 ? "..." : "")}
+      </p>
     </div>
   );
 };

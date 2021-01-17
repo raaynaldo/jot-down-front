@@ -46,16 +46,20 @@ const FolderList = () => {
           key={idx}
           name={folder.name}
           onClick={() => {
-            updateFolder({ id: folder.id, type: FOLDER_TYPES.folder });
-            updateNote({ id: 0, isLoading: false, dataLoaded: false });
+            if (folder !== folder.id || folder.type !== FOLDER_TYPES.folder) {
+              updateFolder({ id: folder.id, type: FOLDER_TYPES.folder });
+              updateNote({ id: 0, isLoading: true, dataLoaded: false });
+            }
           }}
         />
       ))}
       <div
         className="cursor-pointer"
         onClick={() => {
-          updateFolder({ id: folder.id, type: FOLDER_TYPES.archived });
-          updateNote({ id: 0, isLoading: false, dataLoaded: false });
+          if (folder !== folder.id || folder.type !== FOLDER_TYPES.archived) {
+            updateFolder({ id: folder.id, type: FOLDER_TYPES.archived });
+            updateNote({ id: 0, isLoading: true, dataLoaded: false });
+          }
         }}
       >
         Archived
@@ -63,8 +67,10 @@ const FolderList = () => {
       <div
         className="cursor-pointer"
         onClick={() => {
-          updateFolder({ id: folder.id, type: FOLDER_TYPES.trash });
-          updateNote({ id: 0, isLoading: false, dataLoaded: false });
+          if (folder !== folder.id || folder.type !== FOLDER_TYPES.trash) {
+            updateFolder({ id: folder.id, type: FOLDER_TYPES.trash });
+            updateNote({ id: 0, isLoading: true, dataLoaded: false });
+          }
         }}
       >
         Trash
