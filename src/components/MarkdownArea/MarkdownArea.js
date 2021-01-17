@@ -8,12 +8,13 @@ import "./MarkdownArea.css";
 
 function MarkdownArea() {
   const [value, setValue] = useState("");
-  const { note, updateNote, folder } = useContext(MainContext);
+  const { activeNote, updateActiveNote, activeFolder } = useContext(MainContext);
   const { error, isLoading: isLoadingQuery, isError } = useQuery(
-    ["note", note.id],
-    () => getNote(note.id),
+    ["note", activeNote.id],
+    () => getNote(activeNote.id),
     {
-      enabled: !note.isLoading && note.id !== 0,
+      // enabled: !activeNote.isLoading && activeNote.id !== 0,
+      enabled: activeNote.active,
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
         setValue(data.body);
@@ -30,25 +31,25 @@ function MarkdownArea() {
   };
 
   const handleChange = (newValue) => {
-    if (note.dataLoaded) {
-      const newTimer = setTimeout(updateNoteToBack, 3000);
+    if (activeNote.dataLoaded) {
+      const newTimer = setTimeout(updateActiveNoteToBack, 3000);
       setTime(resetTimeout(time, newTimer));
       setValue(newValue);
     } else {
-      updateNote({ dataLoaded: true });
+      updateActiveNote({ dataLoaded: true });
     }
   };
 
   const { mutateAsync, isLoading: isLoadingMutate } = useMutation(() =>
-    saveNote({ note: { id: note.id, body: value } })
+    saveNote({ note: { id: activeNote.id, body: value } })
   );
   const queryClient = useQueryClient();
-  const updateNoteToBack = async () => {
+  const updateActiveNoteToBack = async () => {
     setSaved(true);
     //save todb
     await mutateAsync();
     // queryClient.invalidateQueries(["note", note.id]);
-    queryClient.invalidateQueries(["notes", folder.type, folder.id]);
+    queryClient.invalidateQueries(["notes", activeFolder.type, activeFolder.id]);
     setSaved(false);
     // setTimeout(() => setSaved(false), 1000);
   };
@@ -72,7 +73,7 @@ function MarkdownArea() {
     return <span>Error: {error.message}</span>;
   }
 
-  return note.id !== 0 ? (
+  return activeNote.id !== 0 ? (
     <div className="flex-auto">
       {/* <h1>{saved}</h1> */}
       <h1 className="text-red-50">{saved ? "saved" : ""}</h1>

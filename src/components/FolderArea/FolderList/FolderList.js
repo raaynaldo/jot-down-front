@@ -7,7 +7,9 @@ import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
 
 const FolderList = () => {
-  const { updateNote, updateFolder, folder } = useContext(MainContext);
+  const { updateActiveNote, updateActiveFolder, activeFolder } = useContext(
+    MainContext
+  );
 
   const { data, error, isLoading, isError } = useQuery(
     "folders",
@@ -15,8 +17,8 @@ const FolderList = () => {
     {
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
-        if (folder.isLoading) {
-          updateFolder({
+        if (data.length > 0) {
+          updateActiveFolder({
             id: data[0].id,
             type: FOLDER_TYPES.folder,
             isLoading: false,
@@ -46,30 +48,39 @@ const FolderList = () => {
           key={idx}
           name={folder.name}
           onClick={() => {
-            if (folder !== folder.id || folder.type !== FOLDER_TYPES.folder) {
-              updateFolder({ id: folder.id, type: FOLDER_TYPES.folder });
-              updateNote({ id: 0, isLoading: true, dataLoaded: false });
+            if (
+              activeFolder.id !== folder.id ||
+              activeFolder.type !== FOLDER_TYPES.folder
+            ) {
+              updateActiveFolder({ id: folder.id, type: FOLDER_TYPES.folder });
+              updateActiveNote({ id: 0, active: false, dataLoaded: false });
             }
           }}
         />
       ))}
       <div
-        className="cursor-pointer"
+        className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none"
         onClick={() => {
-          if (folder !== folder.id || folder.type !== FOLDER_TYPES.archived) {
-            updateFolder({ id: folder.id, type: FOLDER_TYPES.archived });
-            updateNote({ id: 0, isLoading: true, dataLoaded: false });
+          if (activeFolder.type !== FOLDER_TYPES.archived) {
+            updateActiveFolder({
+              id: 0,
+              type: FOLDER_TYPES.archived,
+            });
+            updateActiveNote({ id: 0, active: false, dataLoaded: false });
           }
         }}
       >
         Archived
       </div>
       <div
-        className="cursor-pointer"
+        className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none"
         onClick={() => {
-          if (folder !== folder.id || folder.type !== FOLDER_TYPES.trash) {
-            updateFolder({ id: folder.id, type: FOLDER_TYPES.trash });
-            updateNote({ id: 0, isLoading: true, dataLoaded: false });
+          if (activeFolder.type !== FOLDER_TYPES.trash) {
+            updateActiveFolder({
+              id: 0,
+              type: FOLDER_TYPES.trash,
+            });
+            updateActiveNote({ id: 0, active: false, dataLoaded: false });
           }
         }}
       >

@@ -7,16 +7,20 @@ import MainContext from "../../../context/main/mainContext";
 import { FOLDER_TYPES } from "../../../constant";
 
 const NoteList = () => {
-  const { folder, updateNote } = useContext(MainContext);
+  const { activeFolder, activeNote, updateActiveNote } = useContext(
+    MainContext
+  );
   const queryKey =
-    folder.type === FOLDER_TYPES.folder || folder.type === FOLDER_TYPES.tag
-      ? ["notes", folder.type, folder.id]
-      : ["notes", folder.type];
+    activeFolder.type === FOLDER_TYPES.folder ||
+    activeFolder.type === FOLDER_TYPES.tag
+      ? ["notes", activeFolder.type, activeFolder.id]
+      : ["notes", activeFolder.type];
+
   const { data, error, isLoading, isError } = useQuery(
     queryKey,
-    () => getAllNotesByFolderId(folder.type, folder.id),
+    () => getAllNotesByFolderId(activeFolder.type, activeFolder.id),
     {
-      enabled: !folder.isLoading,
+      enabled: !activeFolder.isLoading,
       refetchOnWindowFocus: false,
     }
   );
@@ -41,8 +45,13 @@ const NoteList = () => {
           title={note.title}
           body={note.body}
           onClick={() => {
-            updateNote({ id: note.id, isLoading: false, dataLoaded: false });
-            console.log(note.id);
+            if (activeNote.id !== note.id) {
+              updateActiveNote({
+                id: note.id,
+                active: true,
+                dataLoaded: false,
+              });
+            }
           }}
         />
       ))}

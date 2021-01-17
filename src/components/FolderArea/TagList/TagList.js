@@ -7,7 +7,9 @@ import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
 
 const TagList = () => {
-  const { updateFolder } = useContext(MainContext);
+  const { activeFolder, updateActiveFolder, updateActiveNote } = useContext(
+    MainContext
+  );
 
   const { data, error, isLoading, isError } = useQuery("tags", getAllTags, {
     refetchOnWindowFocus: false,
@@ -31,7 +33,14 @@ const TagList = () => {
         <Tag
           key={idx}
           name={tag.name}
-          onClick={() => updateFolder({ id: tag.id, type: FOLDER_TYPES.tag })}
+          onClick={() => {
+            if (
+              activeFolder.id !== tag.id ||
+              activeFolder.type !== FOLDER_TYPES.tag
+            )
+              updateActiveFolder({ id: tag.id, type: FOLDER_TYPES.tag });
+            updateActiveNote({ id: 0, active: false, dataLoaded: false });
+          }}
         />
       ))}
     </div>
