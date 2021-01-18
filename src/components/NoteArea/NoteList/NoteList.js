@@ -36,7 +36,6 @@ const NoteList = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
-
   return (
     <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
       {data?.map((note, idx) => (
@@ -46,6 +45,7 @@ const NoteList = () => {
           body={note.body}
           onClick={() => {
             if (activeNote.id !== note.id) {
+              console.log("ganti note")
               updateActiveNote({
                 id: note.id,
                 active: true,

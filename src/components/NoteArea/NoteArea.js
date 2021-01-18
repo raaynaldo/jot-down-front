@@ -22,15 +22,15 @@ const NoteSideBar = () => {
             type="search"
             name="serch"
             placeholder="Search"
-            className="h-10 px-5 text-sm bg-white rounded-full focus:outline-none"
+            className="h-10 pl-5 text-sm bg-white rounded-full focus:outline-none"
           />
           <button type="button" className="absolute top-0 right-0 mt-3 mr-4">
             <FaSearch />
           </button>
         </div>
-        <div>
+        <div className="border-2">
           <button>
-            <FaPencilAlt />
+            <FaPencilAlt className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none" />
           </button>
         </div>
       </div>

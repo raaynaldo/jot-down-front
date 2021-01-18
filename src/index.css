@@ -5,10 +5,13 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-h1,h2,h3,p {
+h1,
+h2,
+h3,
+p {
   margin: 0;
 }
 
@@ -28,7 +31,7 @@ h3 {
   @apply inline-block px-8 py-4 bg-blue-200 rounded-md;
 }
 
-.text-error{
+.text-error {
   @apply mt-1 text-xs font-medium tracking-wide text-red-500;
 }
 
@@ -40,21 +43,20 @@ h3 {
   @apply dark:text-gray-300 dark:bg-gray-800
 } */
 
-button:focus{
+button:focus {
   outline: none;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
