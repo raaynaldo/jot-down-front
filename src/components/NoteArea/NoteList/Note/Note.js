@@ -2,7 +2,10 @@ import removeMd from "remove-markdown";
 
 const Note = ({ title, body, onClick }) => {
   const titleSlice = removeMd(title).slice(0, 21);
-  const bodySlice = removeMd(body.slice(body.indexOf("\n"))).slice(0, 65);
+
+  const findSpace = body.indexOf("\n");
+  const newBody = findSpace != -1 ? body.slice(findSpace) : "";
+  const bodySlice = removeMd(newBody).slice(0, 65);
 
   return (
     <div
