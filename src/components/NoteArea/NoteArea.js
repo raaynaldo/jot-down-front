@@ -1,6 +1,7 @@
-import { FaSearch, FaPencilAlt, FaCaretRight } from "react-icons/fa";
+import { FaSearch, FaCaretRight } from "react-icons/fa";
 import { useState } from "react";
 import NoteList from "./NoteList/NoteList";
+import AddNote from "./AddNote/AddNote";
 
 const NoteSideBar = () => {
   const [opened, setOpened] = useState(true);
@@ -28,14 +29,10 @@ const NoteSideBar = () => {
             <FaSearch />
           </button>
         </div>
-        <div className="border-2">
-          <button>
-            <FaPencilAlt className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none" />
-          </button>
-        </div>
+        <AddNote />
       </div>
 
-      <NoteList/>
+      <NoteList />
     </div>
   );
 };

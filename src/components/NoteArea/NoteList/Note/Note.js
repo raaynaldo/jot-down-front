@@ -13,7 +13,7 @@ const Note = ({ title, body, onClick }) => {
       <p className="text-xs">
         Lorem ipsum dolor sit amet consectetur adipisicing elit...
       </p> */}
-      <b>{titleSlice + (titleSlice.length > 20 ? "..." : "")}</b>
+      <b>{titleSlice.length === 0 ? "No Title" : titleSlice + (titleSlice.length > 20 ? "..." : "")}</b>
       <p className="text-xs">
         {bodySlice + (bodySlice.length > 64 ? "..." : "")}
       </p>

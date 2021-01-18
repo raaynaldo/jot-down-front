@@ -8,12 +8,16 @@ import "./MarkdownArea.css";
 
 function MarkdownArea() {
   const [value, setValue] = useState("");
-  const { activeNote, updateActiveNote, activeFolder } = useContext(MainContext);
+  const {
+    activeNote,
+    updateActiveNote,
+    activeFolder,
+    noteListQueryKey,
+  } = useContext(MainContext);
   const { error, isLoading: isLoadingQuery, isError } = useQuery(
     ["note", activeNote.id],
     () => getNote(activeNote.id),
     {
-      // enabled: !activeNote.isLoading && activeNote.id !== 0,
       enabled: activeNote.active,
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
@@ -31,27 +35,29 @@ function MarkdownArea() {
   };
 
   const handleChange = (newValue) => {
-    if (activeNote.dataLoaded) {
-      const newTimer = setTimeout(updateActiveNoteToBack, 3000);
-      setTime(resetTimeout(time, newTimer));
-      setValue(newValue);
-    } else {
-      updateActiveNote({ dataLoaded: true });
-    }
+    console.log("textarea onchange", { activeNote });
+    // if (activeNote.dataLoaded) {
+    const newTimer = setTimeout(updateActiveNoteToBack, 3000);
+    setTime(resetTimeout(time, newTimer));
+    setValue(newValue);
+    // } else {
+    //   updateActiveNote({ dataLoaded: true });
+    // }
   };
 
-  const { mutateAsync, isLoading: isLoadingMutate } = useMutation(() =>
-    saveNote({ note: { id: activeNote.id, body: value } })
+  const { mutateAsync, isLoading: isLoadingMutate } = useMutation(
+    () => saveNote({ note: { id: activeNote.id, body: value } }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(noteListQueryKey);
+        setSaved(false);
+      },
+    }
   );
   const queryClient = useQueryClient();
   const updateActiveNoteToBack = async () => {
     setSaved(true);
-    //save todb
     await mutateAsync();
-    // queryClient.invalidateQueries(["note", note.id]);
-    queryClient.invalidateQueries(["notes", activeFolder.type, activeFolder.id]);
-    setSaved(false);
-    // setTimeout(() => setSaved(false), 1000);
   };
 
   if (isLoadingQuery) {
@@ -75,8 +81,7 @@ function MarkdownArea() {
 
   return activeNote.id !== 0 ? (
     <div className="flex-auto">
-      {/* <h1>{saved}</h1> */}
-      <h1 className="text-red-50">{saved ? "saved" : ""}</h1>
+      <h1 className="text-red-200">{saved ? "saved" : ""}</h1>
       <div className="Container">
         <MDEditor
           value={value}

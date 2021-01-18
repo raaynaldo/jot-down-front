@@ -36,12 +36,12 @@ const SignUp = () => {
           </div>
 
           <div className="flex items-center justify-between mt-4">
-            <a
+            {/* <a
               href="#"
               className="text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500"
             >
               Forget Password?
-            </a>
+            </a> */}
 
             <button
               className="px-4 py-2 text-white bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Note from "./Note/Note";
 import { getAllNotesByFolderId } from "../../../api";
 import { useQuery } from "react-query";
@@ -7,17 +7,25 @@ import MainContext from "../../../context/main/mainContext";
 import { FOLDER_TYPES } from "../../../constant";
 
 const NoteList = () => {
-  const { activeFolder, activeNote, updateActiveNote } = useContext(
-    MainContext
-  );
-  const queryKey =
-    activeFolder.type === FOLDER_TYPES.folder ||
-    activeFolder.type === FOLDER_TYPES.tag
-      ? ["notes", activeFolder.type, activeFolder.id]
-      : ["notes", activeFolder.type];
+  const {
+    activeFolder,
+    activeNote,
+    updateActiveNote,
+    noteListQueryKey,
+    setNoteListQueryKey,
+  } = useContext(MainContext);
+
+  useEffect(() => {
+    setNoteListQueryKey(
+      activeFolder.type === FOLDER_TYPES.folder ||
+        activeFolder.type === FOLDER_TYPES.tag
+        ? ["notes", activeFolder.type, activeFolder.id]
+        : ["notes", activeFolder.type]
+    );
+  }, [activeFolder.type, activeFolder.id]);
 
   const { data, error, isLoading, isError } = useQuery(
-    queryKey,
+    noteListQueryKey,
     () => getAllNotesByFolderId(activeFolder.type, activeFolder.id),
     {
       enabled: !activeFolder.isLoading,
@@ -36,6 +44,7 @@ const NoteList = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+
   return (
     <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
       {data?.map((note, idx) => (
@@ -45,7 +54,7 @@ const NoteList = () => {
           body={note.body}
           onClick={() => {
             if (activeNote.id !== note.id) {
-              console.log("ganti note")
+              console.log("ganti note");
               updateActiveNote({
                 id: note.id,
                 active: true,

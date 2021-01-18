@@ -6,13 +6,14 @@ const MainProvider = (props) => {
   const [activeFolder, setActiveFolder] = useState({
     id: 0,
     type: FOLDER_TYPES.folder,
-    isLoading: true
+    isLoading: true,
   });
   const [activeNote, setActiveNote] = useState({
     id: 0,
     active: false,
     dataLoaded: false,
   });
+  const [noteListQueryKey, setNoteListQueryKey] = useState([]);
 
   const updateActiveFolder = (data) => {
     setActiveFolder({
@@ -30,7 +31,14 @@ const MainProvider = (props) => {
 
   return (
     <MainContext.Provider
-      value={{ activeFolder, activeNote, updateActiveFolder, updateActiveNote }}
+      value={{
+        activeFolder,
+        activeNote,
+        noteListQueryKey,
+        updateActiveFolder,
+        updateActiveNote,
+        setNoteListQueryKey,
+      }}
     >
       {props.children}
     </MainContext.Provider>

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { FOLDER_TYPES } from "./constant";
 
 export const getAllFolders = async () => {
   try {
@@ -21,15 +20,7 @@ export const getAllTags = async () => {
 
 export const getAllNotesByFolderId = async (type, id) => {
   try {
-    let route = "/get_notes_by_folder/" + id;
-    if (type === FOLDER_TYPES.archived) {
-      route = "/get_notes_in_archived/";
-    } else if (type === FOLDER_TYPES.trash) {
-      route = "/get_notes_in_trash/";
-    } else if (type === FOLDER_TYPES.tag) {
-      route = "/get_notes_by_tag/" + id;
-    }
-    const response = await axios.get(route);
+    const response = await axios.get(`/get_notes?type=${type}&id=${id}`);
     return response.data.notes;
   } catch (error) {
     return error.response.message;
@@ -50,8 +41,20 @@ export const saveNote = async (data) => {
     const config = {
       "Content-Type": "application/json",
     };
-    await axios.post("/save_note", data, config);
+    await axios.patch("/save_note", data, config);
     return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};
+
+export const addNewNote = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    const response = await axios.post("/add_note", data, config);
+    return response.data.note;
   } catch (error) {
     return error.response.message;
   }
