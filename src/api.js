@@ -59,3 +59,39 @@ export const addNewNote = async (data) => {
     return error.response.message;
   }
 };
+
+export const archiveNote = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    await axios.patch("/archive_note", data, config);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};
+
+export const deleteNote = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    await axios.patch("/delete_note", data, config);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};
+
+export const moveNote = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    await axios.patch("/move_note", data, config);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};

@@ -1,31 +1,39 @@
 import { useContext } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { Menu, Item, Separator, Submenu } from "react-contexify";
 import { FOLDER_TYPES } from "../../constant";
+import { archiveNote, deleteNote, moveNote } from "../../api";
 import MainContext from "../../context/main/mainContext";
 import "react-contexify/dist/ReactContexify.css";
 
 const ContextMenu = () => {
-  const { folderList } = useContext(MainContext);
+  const { folderList, activeFolder, noteListQueryKey } = useContext(
+    MainContext
+  );
 
-//   const { mutateAsync } = useMutation(
-//     () => saveNote({ note: { id: activeNote.id, body: value } }),
-//     {
-//       onSuccess: () => {
-//         queryClient.invalidateQueries(noteListQueryKey);
-//         setTimeout(() => setSaved(false), 3000);
-//       },
-//     }
-//   );
+  const queryClient = useQueryClient();
+  const { mutateAsync: archiveMutateAsync } = useMutation(archiveNote);
+  const { mutateAsync: deleteMutateAsync } = useMutation(deleteNote);
+  const { mutateAsync: moveMutateAsync } = useMutation(moveNote);
 
-  const archiveHanlder = ({ props }) => {
-    console.log(props.id);
+  const archiveHandler = async ({ props, data }) => {
+    const isArchive = data === "archive";
+    await archiveMutateAsync({ id: props.id, archive: isArchive });
+    queryClient.invalidateQueries(noteListQueryKey);
   };
 
-  const handleItemClick = ({ props, data }) => {
-    console.log(props, data);
+  const deleteHandler = async ({ props, data }) => {
+    const isdelete = data === "delete";
+    await deleteMutateAsync({ id: props.id, delete: isdelete });
+    queryClient.invalidateQueries(noteListQueryKey);
   };
 
+  const moveHandler = async ({ props, data }) => {
+    await moveMutateAsync({ id: props.id, folder_id: data });
+    queryClient.invalidateQueries(noteListQueryKey);
+  };
+
+  // How to organize disable and hidden
   const isItemDisabled = ({ props, data }) => {
     if (
       props.folderType === FOLDER_TYPES.folder ||
@@ -54,46 +62,42 @@ const ContextMenu = () => {
 
   return (
     <Menu id="note-context-menu">
-      <Item onClick={archiveHanlder} disabled={isItemDisabled} data="archive">
+      <Item onClick={archiveHandler} disabled={isItemDisabled} data="archive">
         Archive
       </Item>
-      <Item
-        onClick={handleItemClick}
-        disabled={isItemDisabled}
-        data="unarchive"
-      >
+      <Item onClick={archiveHandler} disabled={isItemDisabled} data="unarchive">
         Unarchive
       </Item>
       <Separator />
       <Item
-        onClick={handleItemClick}
+        // onClick={handleItemClick}
         hidden={isDeleteHidden}
         data="permanetly-delete"
       >
         Permantly Delete
       </Item>
       <Item
-        onClick={handleItemClick}
+        onClick={deleteHandler}
         disabled={isItemDisabled}
         hidden={isDeleteHidden}
         data="delete"
       >
         Delete
       </Item>
-      <Item onClick={handleItemClick} disabled={isItemDisabled} data="restore">
+      <Item onClick={deleteHandler} disabled={isItemDisabled} data="restore">
         Restore
       </Item>
       <Separator />
       <Submenu label="Move to" disabled={isMoveToDisabled}>
-        {folderList?.map((folder) => (
-          <Item
-            key={folder.id}
-            onClick={handleItemClick}
-            data={"Move to " + folder.name}
-          >
-            {folder.name}
-          </Item>
-        ))}
+        {folderList?.map((folder) => {
+          if (folder.id !== activeFolder.id)
+            return (
+              <Item key={folder.id} onClick={moveHandler} data={folder.id}>
+                {folder.name}
+              </Item>
+            );
+          else return null;
+        })}
       </Submenu>
     </Menu>
   );
