@@ -5,6 +5,7 @@ import { FOLDER_TYPES } from "../../../constant";
 import { getAllTags } from "../../../api";
 import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
+import ContextMenu from "../../ContextMenu/ContextMenu";
 
 const TagList = () => {
   const { activeFolder, updateActiveFolder, updateActiveNote } = useContext(
@@ -29,10 +30,15 @@ const TagList = () => {
 
   return (
     <div id="TagList" className="space-y-2">
-      {data.map((tag, idx) => (
+      {data.map((tag) => (
         <Tag
-          key={idx}
+          key={tag.id}
           name={tag.name}
+          active={
+            activeFolder.id === tag.id && activeFolder.type === FOLDER_TYPES.tag
+              ? "underline font-bold"
+              : ""
+          }
           onClick={() => {
             if (
               activeFolder.id !== tag.id ||

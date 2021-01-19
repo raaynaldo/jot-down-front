@@ -3,6 +3,7 @@ import MainContext from "./mainContext";
 import { FOLDER_TYPES } from "../../constant";
 
 const MainProvider = (props) => {
+  const [folderList, setFolderList] = useState([]);
   const [activeFolder, setActiveFolder] = useState({
     id: 0,
     type: FOLDER_TYPES.folder,
@@ -38,6 +39,8 @@ const MainProvider = (props) => {
         updateActiveFolder,
         updateActiveNote,
         setNoteListQueryKey,
+        folderList,
+        setFolderList,
       }}
     >
       {props.children}

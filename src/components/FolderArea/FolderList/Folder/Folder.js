@@ -1,7 +1,7 @@
-const Folder = ({ name, onClick }) => {
+const Folder = ({ name, onClick, active }) => {
   return (
     <div
-      className="pl-3 transform cursor-pointer hover:scale-110 motion-reduce:transform-none"
+      className={`pl-3 transform cursor-pointer hover:scale-110 motion-reduce:transform-none ${active}`}
       onClick={onClick}
     >
       {name}

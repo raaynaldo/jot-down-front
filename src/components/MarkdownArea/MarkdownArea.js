@@ -4,6 +4,7 @@ import MainContext from "../../context/main/mainContext";
 import { getNote, saveNote } from "../../api";
 import Loader from "react-loader-spinner";
 import MDEditor from "@uiw/react-md-editor";
+import { FaCheckCircle } from "react-icons/fa";
 import "./MarkdownArea.css";
 
 function MarkdownArea() {
@@ -35,14 +36,9 @@ function MarkdownArea() {
   };
 
   const handleChange = (newValue) => {
-    console.log("textarea onchange", { activeNote });
-    // if (activeNote.dataLoaded) {
     const newTimer = setTimeout(updateActiveNoteToBack, 3000);
     setTime(resetTimeout(time, newTimer));
     setValue(newValue);
-    // } else {
-    //   updateActiveNote({ dataLoaded: true });
-    // }
   };
 
   const { mutateAsync, isLoading: isLoadingMutate } = useMutation(
@@ -50,7 +46,7 @@ function MarkdownArea() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(noteListQueryKey);
-        setSaved(false);
+        setTimeout(() => setSaved(false), 3000);
       },
     }
   );
@@ -81,8 +77,7 @@ function MarkdownArea() {
 
   return activeNote.id !== 0 ? (
     <div className="flex-auto">
-      <h1 className="text-red-200">{saved ? "saved" : ""}</h1>
-      <div className="Container">
+      <div className="relative Container">
         <MDEditor
           value={value}
           onChange={handleChange}
@@ -90,6 +85,12 @@ function MarkdownArea() {
           visiableDragbar={false}
           autoFocus={false}
         />
+        {saved ? (
+          <div className="absolute z-50 flex flex-row items-center space-x-1.5 top-1 right-5">
+            <FaCheckCircle className="text-green-400" />
+            <p>Saved Successfully</p>
+          </div>
+        ) : null}
       </div>
     </div>
   ) : (

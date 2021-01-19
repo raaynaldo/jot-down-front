@@ -7,9 +7,12 @@ import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
 
 const FolderList = () => {
-  const { updateActiveNote, updateActiveFolder, activeFolder } = useContext(
-    MainContext
-  );
+  const {
+    updateActiveNote,
+    updateActiveFolder,
+    activeFolder,
+    setFolderList,
+  } = useContext(MainContext);
 
   const { data, error, isLoading, isError } = useQuery(
     "folders",
@@ -17,13 +20,12 @@ const FolderList = () => {
     {
       refetchOnWindowFocus: false,
       onSuccess: (data) => {
-        if (data.length > 0) {
-          updateActiveFolder({
-            id: data[0].id,
-            type: FOLDER_TYPES.folder,
-            isLoading: false,
-          });
-        }
+        updateActiveFolder({
+          id: data[0].id,
+          type: FOLDER_TYPES.folder,
+          isLoading: false,
+        });
+        setFolderList(data);
       },
     }
   );
@@ -47,6 +49,12 @@ const FolderList = () => {
         <Folder
           key={idx}
           name={folder.name}
+          active={
+            activeFolder.id === folder.id &&
+            activeFolder.type === FOLDER_TYPES.folder
+              ? "underline font-bold"
+              : ""
+          }
           onClick={() => {
             if (
               activeFolder.id !== folder.id ||
@@ -59,7 +67,11 @@ const FolderList = () => {
         />
       ))}
       <div
-        className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none"
+        className={`transform cursor-pointer hover:scale-110 motion-reduce:transform-none ${
+          activeFolder.type === FOLDER_TYPES.archived
+            ? "underline font-bold"
+            : ""
+        }`}
         onClick={() => {
           if (activeFolder.type !== FOLDER_TYPES.archived) {
             updateActiveFolder({
@@ -73,7 +85,11 @@ const FolderList = () => {
         Archived
       </div>
       <div
-        className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none"
+        className={`transform cursor-pointer hover:scale-110 motion-reduce:transform-none ${
+          activeFolder.type === FOLDER_TYPES.trash
+            ? "underline font-bold"
+            : ""
+        }`}
         onClick={() => {
           if (activeFolder.type !== FOLDER_TYPES.trash) {
             updateActiveFolder({

@@ -4,6 +4,7 @@ import { getAllNotesByFolderId } from "../../../api";
 import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
 import MainContext from "../../../context/main/mainContext";
+import { useContextMenu } from "react-contexify";
 import { FOLDER_TYPES } from "../../../constant";
 
 const NoteList = () => {
@@ -14,6 +15,10 @@ const NoteList = () => {
     noteListQueryKey,
     setNoteListQueryKey,
   } = useContext(MainContext);
+
+  const { show } = useContextMenu({
+    id: "note-context-menu",
+  });
 
   useEffect(() => {
     setNoteListQueryKey(
@@ -45,23 +50,35 @@ const NoteList = () => {
     return <span>Error: {error.message}</span>;
   }
 
+  const ContextMenuHandler = (e, id) => {
+    show(e, {
+      props: {
+        id: id,
+        folderType: activeFolder.type,
+      },
+    });
+  };
+
+  const clickHandler = (id) => {
+    if (activeNote.id !== id) {
+      updateActiveNote({
+        id: id,
+        active: true,
+        dataLoaded: false,
+      });
+    }
+  };
+
   return (
-    <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
-      {data?.map((note, idx) => (
+    <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto cursor-pointer">
+      {data?.map((note) => (
         <Note
-          key={idx}
+          key={note.id}
+          id={note.id}
           title={note.title}
           body={note.body}
-          onClick={() => {
-            if (activeNote.id !== note.id) {
-              console.log("ganti note");
-              updateActiveNote({
-                id: note.id,
-                active: true,
-                dataLoaded: false,
-              });
-            }
-          }}
+          onClick={() => clickHandler(note.id)}
+          onContextMenu={(e) => ContextMenuHandler(e, note.id)}
         />
       ))}
     </div>
