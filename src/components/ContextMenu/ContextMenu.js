@@ -1,12 +1,27 @@
+import { useContext } from "react";
+import { useMutation, useQuery } from "react-query";
 import { Menu, Item, Separator, Submenu } from "react-contexify";
 import { FOLDER_TYPES } from "../../constant";
+import MainContext from "../../context/main/mainContext";
 import "react-contexify/dist/ReactContexify.css";
 
-const ContextMenu = ({ folders }) => {
-  //   const folders = [
-  //     { id: 1, name: "Main" },
-  //     { id: 2, name: "code" },
-  //   ];
+const ContextMenu = () => {
+  const { folderList } = useContext(MainContext);
+
+//   const { mutateAsync } = useMutation(
+//     () => saveNote({ note: { id: activeNote.id, body: value } }),
+//     {
+//       onSuccess: () => {
+//         queryClient.invalidateQueries(noteListQueryKey);
+//         setTimeout(() => setSaved(false), 3000);
+//       },
+//     }
+//   );
+
+  const archiveHanlder = ({ props }) => {
+    console.log(props.id);
+  };
+
   const handleItemClick = ({ props, data }) => {
     console.log(props, data);
   };
@@ -39,7 +54,7 @@ const ContextMenu = ({ folders }) => {
 
   return (
     <Menu id="note-context-menu">
-      <Item onClick={handleItemClick} disabled={isItemDisabled} data="archive">
+      <Item onClick={archiveHanlder} disabled={isItemDisabled} data="archive">
         Archive
       </Item>
       <Item
@@ -70,7 +85,7 @@ const ContextMenu = ({ folders }) => {
       </Item>
       <Separator />
       <Submenu label="Move to" disabled={isMoveToDisabled}>
-        {folders?.map((folder) => (
+        {folderList?.map((folder) => (
           <Item
             key={folder.id}
             onClick={handleItemClick}
@@ -79,12 +94,6 @@ const ContextMenu = ({ folders }) => {
             {folder.name}
           </Item>
         ))}
-        {/* <Item onClick={handleItemClick} data="Move to Folder A">
-          Folder A
-        </Item>
-        <Item onClick={handleItemClick} data="Move to Folder B">
-          Folder B
-        </Item> */}
       </Submenu>
     </Menu>
   );

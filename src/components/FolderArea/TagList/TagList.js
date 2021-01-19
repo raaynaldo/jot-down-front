@@ -5,7 +5,6 @@ import { FOLDER_TYPES } from "../../../constant";
 import { getAllTags } from "../../../api";
 import { useQuery } from "react-query";
 import Loader from "react-loader-spinner";
-import ContextMenu from "../../ContextMenu/ContextMenu";
 
 const TagList = () => {
   const { activeFolder, updateActiveFolder, updateActiveNote } = useContext(

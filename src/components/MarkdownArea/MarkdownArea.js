@@ -11,8 +11,8 @@ function MarkdownArea() {
   const [value, setValue] = useState("");
   const {
     activeNote,
-    updateActiveNote,
-    activeFolder,
+    // updateActiveNote,
+    // activeFolder,
     noteListQueryKey,
   } = useContext(MainContext);
   const { error, isLoading: isLoadingQuery, isError } = useQuery(
@@ -41,7 +41,7 @@ function MarkdownArea() {
     setValue(newValue);
   };
 
-  const { mutateAsync, isLoading: isLoadingMutate } = useMutation(
+  const { mutateAsync } = useMutation(
     () => saveNote({ note: { id: activeNote.id, body: value } }),
     {
       onSuccess: () => {
