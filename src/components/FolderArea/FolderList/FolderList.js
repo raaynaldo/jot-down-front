@@ -78,6 +78,7 @@ const FolderList = () => {
               ? "underline font-bold"
               : ""
           }
+          updateActiveFolder={updateActiveFolder}
           onClick={() => {
             if (
               activeFolder.id !== folder.id ||

@@ -4,7 +4,7 @@ import { useContextMenu } from "react-contexify";
 import { updateFolder } from "../../../../api";
 import InputFolderName from "../../../shared/InputFolderName/InputFolderName";
 
-const Folder = ({ id, name, onClick, active }) => {
+const Folder = ({ id, name, onClick, active, updateActiveFolder }) => {
   const { show } = useContextMenu({
     id: "FolderContextMenu",
     props: {
@@ -18,7 +18,8 @@ const Folder = ({ id, name, onClick, active }) => {
   const queryClient = useQueryClient();
   const renameFolderHandler = async (name) => {
     await mutateAsync({ id: id, name: name });
-    queryClient.invalidateQueries("folders");
+    await queryClient.invalidateQueries("folders");
+    updateActiveFolder({ id: id });
   };
 
   return (
