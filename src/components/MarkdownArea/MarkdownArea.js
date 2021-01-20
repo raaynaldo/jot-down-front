@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import MDEditor from "@uiw/react-md-editor";
 import { FaCheckCircle } from "react-icons/fa";
 import "./MarkdownArea.css";
+import Tags from "./Tags/Tags";
 
 function MarkdownArea() {
   const [value, setValue] = useState("");
@@ -15,7 +16,7 @@ function MarkdownArea() {
     // activeFolder,
     noteListQueryKey,
   } = useContext(MainContext);
-  const { error, isLoading: isLoadingQuery, isError } = useQuery(
+  const { data, error, isLoading: isLoadingQuery, isError } = useQuery(
     ["note", activeNote.id],
     () => getNote(activeNote.id),
     {
@@ -77,11 +78,11 @@ function MarkdownArea() {
 
   return activeNote.id !== 0 ? (
     <div className="flex-auto">
+      <Tags tags={data.tags.map((tag) => tag.name)} data={data} noteId={activeNote.id} />
       <div className="relative Container">
         <MDEditor
           value={value}
           onChange={handleChange}
-          // height={window.innerHeight - 48}
           visiableDragbar={false}
           autoFocus={false}
         />

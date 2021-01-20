@@ -45,7 +45,6 @@ const ContextMenu = () => {
   };
 
   const deletePermanentlyHandler = async ({ props }) => {
-    console.log(props.id)
     await deletePermanentlyMutateAsync({ id: props.id });
     afterHandling();
   };

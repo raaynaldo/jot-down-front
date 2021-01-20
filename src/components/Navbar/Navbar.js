@@ -1,7 +1,12 @@
 // import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../context/auth/authContext";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+  console.log(user);
+
   return (
     <nav className="flex items-center justify-between h-12 px-8 bg-white shadow dark:bg-gray-800 lg:flex-row">
       <div className="text-xl font-semibold text-gray-700">
@@ -12,20 +17,25 @@ const Navbar = () => {
           Jot Down
         </h3>
       </div>
-      <div>
-        <button
-          type="button"
-          className="flex items-center focus:outline-none"
-          aria-label="toggle profile dropdown"
-        >
-          <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-            <img
-              src="https://lh3.googleusercontent.com/a-/AOh14Gi0DgItGDTATTFV6lPiVrqtja6RZ_qrY91zg42o-g"
-              className="object-cover w-full h-full"
-              alt="avatar"
-            />
-          </div>
-        </button>
+      <div className="flex flex-row items-center space-x-3">
+        <div className="text-gray-800 text-md dark:text-white">
+          Hello, {user.full_name}
+        </div>
+        <div>
+          <button
+            type="button"
+            className="flex items-center focus:outline-none"
+            aria-label="toggle profile dropdown"
+          >
+            <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+              <img
+                src="https://lh3.googleusercontent.com/a-/AOh14Gi0DgItGDTATTFV6lPiVrqtja6RZ_qrY91zg42o-g"
+                className="object-cover w-full h-full"
+                alt="avatar"
+              />
+            </div>
+          </button>
+        </div>
       </div>
       {/* <ul className="flex items-center space-x-8">
         <li>

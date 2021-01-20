@@ -98,10 +98,31 @@ export const moveNote = async (data) => {
 
 export const deletePermanentlyNote = async (data) => {
   try {
+    await axios.delete("/delete_permanently_note/" + data.id);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};
+
+export const addNoteTag = async (data) => {
+  try {
     const config = {
       "Content-Type": "application/json",
     };
-    await axios.delete("/delete_permanently_note/" + data.id);
+    await axios.post("/add_note_tag/", data, config);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};
+
+export const removeNoteTag = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    await axios.post("/remove_note_tag/", data, config);
     return true;
   } catch (error) {
     return error.response.message;
