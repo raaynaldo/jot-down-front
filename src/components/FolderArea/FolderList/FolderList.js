@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Folder from "./Folder/Folder";
 import MainContext from "../../../context/main/mainContext";
 import { FOLDER_TYPES } from "../../../constant";
-import { getAllFolders } from "../../../api";
-import { useQuery } from "react-query";
+import { getAllFolders, createFolder } from "../../../api";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import Loader from "react-loader-spinner";
+import InputFolderName from "../../shared/InputFolderName/InputFolderName";
+import { FiFolderPlus } from "react-icons/fi";
 
 const FolderList = () => {
   const {
@@ -13,7 +15,7 @@ const FolderList = () => {
     activeFolder,
     setFolderList,
   } = useContext(MainContext);
-
+  const [newFolderActive, setNewFolderActive] = useState(false);
   const { data, error, isLoading, isError } = useQuery(
     "folders",
     getAllFolders,
@@ -30,6 +32,15 @@ const FolderList = () => {
     }
   );
 
+  //add new folder
+  const { mutateAsync } = useMutation(createFolder);
+  const queryClient = useQueryClient();
+  const addNewFolderHanlder = async (name) => {
+    const id = await mutateAsync({ name: name });
+    await queryClient.invalidateQueries("folders");
+    updateActiveFolder({ id: id });
+  };
+
   if (isLoading) {
     return (
       <>
@@ -44,10 +55,22 @@ const FolderList = () => {
 
   return (
     <div id="FolderList" className="space-y-2">
-      <div>Folders</div>
+      <div className="flex flex-row items-center space-x-2">
+        <span>Folders</span>
+        <FiFolderPlus
+          className="cursor-pointer"
+          onClick={() => setNewFolderActive(true)}
+        />
+      </div>
+      <InputFolderName
+        active={newFolderActive}
+        setDeactive={() => setNewFolderActive(false)}
+        onSave={addNewFolderHanlder}
+      />
       {data?.map((folder, idx) => (
         <Folder
           key={idx}
+          id={folder.id}
           name={folder.name}
           active={
             activeFolder.id === folder.id &&
@@ -86,9 +109,7 @@ const FolderList = () => {
       </div>
       <div
         className={`transform cursor-pointer hover:scale-110 motion-reduce:transform-none ${
-          activeFolder.type === FOLDER_TYPES.trash
-            ? "underline font-bold"
-            : ""
+          activeFolder.type === FOLDER_TYPES.trash ? "underline font-bold" : ""
         }`}
         onClick={() => {
           if (activeFolder.type !== FOLDER_TYPES.trash) {

@@ -128,3 +128,28 @@ export const removeNoteTag = async (data) => {
     return error.response.message;
   }
 };
+
+export const createFolder = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    const response = await axios.post("/create_folder", data, config);
+    return response.data.id;
+  } catch (error) {
+    return error.response.message;
+  }
+};
+
+export const updateFolder = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    console.log(data);
+    const response = await axios.patch("/update_folder", data, config);
+    return response.data.note;
+  } catch (error) {
+    return error.response.message;
+  }
+};
