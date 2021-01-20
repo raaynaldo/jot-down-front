@@ -95,3 +95,15 @@ export const moveNote = async (data) => {
     return error.response.message;
   }
 };
+
+export const deletePermanentlyNote = async (data) => {
+  try {
+    const config = {
+      "Content-Type": "application/json",
+    };
+    await axios.delete("/delete_permanently_note/" + data.id);
+    return true;
+  } catch (error) {
+    return error.response.message;
+  }
+};

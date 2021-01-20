@@ -51,6 +51,7 @@ const NoteList = () => {
   }
 
   const ContextMenuHandler = (e, id) => {
+    clickHandler(id);
     show(e, {
       props: {
         id: id,
