@@ -1,11 +1,11 @@
 import Navbar from "../../components/Navbar/Navbar";
 import Main from "../Main/Main";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div className="w-full">
-        <Navbar />
-        <Main />
+      <Navbar history={props.history} />
+      <Main />
     </div>
   );
 };

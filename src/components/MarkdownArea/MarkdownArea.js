@@ -63,7 +63,7 @@ function MarkdownArea() {
         <div className="flex-auto bg-gray-300 svg dark:bg-gray-700">
           <Loader
             type="ThreeDots"
-            color="#ee4540"
+            color="#d1fae5"
             height={15}
             className="flex items-center justify-center flex-1 h-full"
           />

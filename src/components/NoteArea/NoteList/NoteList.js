@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import MainContext from "../../../context/main/mainContext";
 import { useContextMenu } from "react-contexify";
 import { FOLDER_TYPES } from "../../../constant";
+import removeMd from "remove-markdown";
 
 const NoteList = () => {
   const {
@@ -76,7 +77,9 @@ const NoteList = () => {
     <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto cursor-pointer">
       {data
         ?.filter((note) =>
-          note.body.toLowerCase().includes(searchKeyNote.toLowerCase())
+          removeMd(note.body)
+            .toLowerCase()
+            .includes(searchKeyNote.toLowerCase())
         )
         .map((note) => (
           <Note
