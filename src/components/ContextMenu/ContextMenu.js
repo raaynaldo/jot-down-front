@@ -46,6 +46,7 @@ const ContextMenu = () => {
 
   const deletePermanentlyHandler = async ({ props }) => {
     await deletePermanentlyMutateAsync({ id: props.id });
+    queryClient.invalidateQueries("tags")
     afterHandling();
   };
 

@@ -153,3 +153,13 @@ export const updateFolder = async (data) => {
     return error.response.message;
   }
 };
+
+export const deleteFolder = async (data) => {
+  try {
+    console.log(data);
+    const response = await axios.delete("/delete_folder/" + data.id);
+    return response.data.note;
+  } catch (error) {
+    return error.response.message;
+  }
+};

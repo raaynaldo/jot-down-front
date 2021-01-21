@@ -78,7 +78,11 @@ function MarkdownArea() {
 
   return activeNote.id !== 0 ? (
     <div className="flex-auto">
-      <Tags tags={data.tags.map((tag) => tag.name)} data={data} noteId={activeNote.id} />
+      <Tags
+        tags={data.tags.map((tag) => tag.name)}
+        data={data}
+        noteId={activeNote.id}
+      />
       <div className="relative Container">
         <MDEditor
           value={value}

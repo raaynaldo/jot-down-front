@@ -9,18 +9,21 @@ import "./Tags.css";
 const Tags = (props) => {
   const [tags, setTags] = useState([]);
   useEffect(() => {
-    setTags(props.tags);
-  }, [props.tags]);
+    console.log("ganti");
+    setTags(props.data.tags.map((tag) => tag.name));
+  }, [props.data]);
 
   const queryClient = useQueryClient();
   const { mutateAsync: addMutateAsync } = useMutation(addNoteTag, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("tags");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("tags");
+      // await queryClient.invalidateQueries(["note", props.noteId])
     },
   });
   const { mutateAsync: removeMutateAsync } = useMutation(removeNoteTag, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("tags");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("tags");
+      // await queryClient.invalidateQueries(["note", props.noteId])
     },
   });
 

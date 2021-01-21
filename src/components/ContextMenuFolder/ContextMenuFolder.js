@@ -1,19 +1,19 @@
 import { Menu, Item } from "react-contexify";
 
 const ContextMenuFolder = () => {
-  function handleItemClick({ event, props, triggerEvent, data }) {
-    console.log(event, props, triggerEvent, data);
-  }
-
   const renameHandler = ({ props }) => {
     props.setEditNameOn();
     console.log(props);
   };
 
+  const deleteHandler = ({ props }) => {
+    props.deleteFolder();
+  };
+
   return (
     <Menu id="FolderContextMenu">
       <Item onClick={renameHandler}>Rename</Item>
-      <Item onClick={handleItemClick}>Delete</Item>
+      <Item onClick={deleteHandler}>Delete</Item>
     </Menu>
   );
 };
