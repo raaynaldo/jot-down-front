@@ -15,6 +15,7 @@ const MainProvider = (props) => {
     dataLoaded: false,
   });
   const [noteListQueryKey, setNoteListQueryKey] = useState([]);
+  const [searchKeyNote, setSearchKeyNote] = useState("");
 
   const updateActiveFolder = (data) => {
     setActiveFolder({
@@ -41,6 +42,8 @@ const MainProvider = (props) => {
         setNoteListQueryKey,
         folderList,
         setFolderList,
+        searchKeyNote,
+        setSearchKeyNote,
       }}
     >
       {props.children}

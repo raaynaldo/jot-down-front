@@ -14,6 +14,7 @@ const NoteList = () => {
     updateActiveNote,
     noteListQueryKey,
     setNoteListQueryKey,
+    searchKeyNote,
   } = useContext(MainContext);
 
   const { show } = useContextMenu({
@@ -70,18 +71,23 @@ const NoteList = () => {
     }
   };
 
+  // console.log(searchKeyNote);
   return (
     <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto cursor-pointer">
-      {data?.map((note) => (
-        <Note
-          key={note.id}
-          id={note.id}
-          title={note.title}
-          body={note.body}
-          onClick={() => clickHandler(note.id)}
-          onContextMenu={(e) => ContextMenuHandler(e, note.id)}
-        />
-      ))}
+      {data
+        ?.filter((note) =>
+          note.body.toLowerCase().includes(searchKeyNote.toLowerCase())
+        )
+        .map((note) => (
+          <Note
+            key={note.id}
+            id={note.id}
+            title={note.title}
+            body={note.body}
+            onClick={() => clickHandler(note.id)}
+            onContextMenu={(e) => ContextMenuHandler(e, note.id)}
+          />
+        ))}
     </div>
   );
 };
