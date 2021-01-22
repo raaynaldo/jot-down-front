@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import "./Navbar.css";
 
@@ -14,12 +15,11 @@ const Navbar = (props) => {
   return (
     <nav className="flex items-center justify-between h-12 px-8 bg-white shadow dark:bg-gray-800 lg:flex-row">
       <div className="text-xl font-semibold text-gray-700">
-        <h3
-          to="/"
-          className="text-xl font-bold text-gray-800 dark:text-white md:text-2xl hover:text-gray-700 dark:hover:text-gray-300"
-        >
-          Jot Down
-        </h3>
+        <NavLink to="/">
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white md:text-2xl hover:text-gray-700 dark:hover:text-gray-300">
+            Jot Down
+          </h3>
+        </NavLink>
       </div>
       <div className="flex flex-row items-center space-x-3">
         <div className="text-gray-800 text-md dark:text-white">
@@ -48,9 +48,12 @@ const Navbar = (props) => {
             }`}
             onMouseLeave={() => setActive(false)}
           >
-            <div className="block px-4 py-2 text-sm text-gray-700 capitalize cursor-pointer dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
-              your profile
-            </div>
+            <NavLink
+              to="/profile"
+              className="block px-4 py-2 text-sm text-gray-700 capitalize cursor-pointer dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white"
+            >
+              My profile
+            </NavLink>
             <div
               className="block px-4 py-2 text-sm text-gray-700 capitalize cursor-pointer dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white"
               onClick={logoutHandler}

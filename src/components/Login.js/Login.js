@@ -4,12 +4,12 @@ import { useForm } from "react-hook-form";
 import AuthContext from "../../context/auth/authContext";
 
 const Login = (props) => {
-  const { login, clearErrors, isAuthenticated, validation } = useContext(
+  const { login, isAuthenticated, validation } = useContext(
     AuthContext
   );
 
   useEffect(() => {
-    clearErrors();
+    // clearErrors();
     if (isAuthenticated) {
       props.history.push("/");
     }
