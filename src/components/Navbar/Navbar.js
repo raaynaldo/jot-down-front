@@ -48,11 +48,11 @@ const Navbar = (props) => {
             }`}
             onMouseLeave={() => setActive(false)}
           >
-            <div className="block px-4 py-2 text-sm text-gray-700 capitalize dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+            <div className="block px-4 py-2 text-sm text-gray-700 capitalize cursor-pointer dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
               your profile
             </div>
             <div
-              className="block px-4 py-2 text-sm text-gray-700 capitalize dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white"
+              className="block px-4 py-2 text-sm text-gray-700 capitalize cursor-pointer dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white"
               onClick={logoutHandler}
             >
               Logout

@@ -74,7 +74,7 @@ const NoteList = () => {
 
   // console.log(searchKeyNote);
   return (
-    <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto cursor-pointer">
+    <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
       {data
         ?.filter((note) =>
           removeMd(note.body)

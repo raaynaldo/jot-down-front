@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import AuthContext from "../../context/auth/authContext";
 
 const Login = (props) => {
-  const authContext = useContext(AuthContext);
-  const { login, clearErrors, isAuthenticated } = authContext;
+  const { login, clearErrors, isAuthenticated, validation } = useContext(
+    AuthContext
+  );
+
   useEffect(() => {
     clearErrors();
     if (isAuthenticated) {
@@ -13,11 +15,22 @@ const Login = (props) => {
     }
   }, [isAuthenticated, props.history]);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, setError } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     login({ user: data });
   };
+
+  useEffect(() => {
+    Object.entries(validation).forEach(([key, value]) => {
+      console.log(key, value);
+      setError(key, {
+        type: "manual",
+        message: value.join(", "),
+      });
+    });
+  }, [validation]);
+
   return (
     // <div className="flex items-center h-screen">
     <div className="flex flex-auto max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
@@ -81,7 +94,7 @@ const Login = (props) => {
           <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
         </div> */}
 
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-4">
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200">
               Username
@@ -91,10 +104,10 @@ const Login = (props) => {
               className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               type="text"
               name="username"
-              ref={register({ required: true })}
+              ref={register({ required: "username is required" })}
             />
             {errors.username && (
-              <p className="text-error">Username is required</p>
+              <p className="text-error">{errors.username.message}</p>
             )}
           </div>
 
@@ -110,10 +123,10 @@ const Login = (props) => {
               className="block w-full px-4 py-2 text-gray-700 border border-gray-300 rounded bg-wbg-white dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               name="password"
               type="password"
-              ref={register({ required: true })}
+              ref={register({ required: "password is required" })}
             />
             {errors.password && (
-              <p className="text-error">Password is required</p>
+              <p className="text-error">{errors.password.message}</p>
             )}
           </div>
 

@@ -24,7 +24,6 @@ const App = () => {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
-          {/* <Route path="/" exact component={Home} /> */}
           <PrivateRoute path="/" exact component={Home} />
           <Route path="*" render={() => <Redirect to="/" />} />
         </Switch>

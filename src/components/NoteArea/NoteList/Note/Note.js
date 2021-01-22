@@ -35,7 +35,7 @@ const Note = ({ id, title, body, onClick, onContextMenu }) => {
 
   return (
     <div
-      className={`flex flex-col h-20 px-5 py-2 space-y-1 text-gray-700 ${
+      className={`flex flex-col h-20 px-5 py-2 space-y-1 text-gray-700 cursor-pointer ${
         activeNote.id === id ? "bg-green-100" : "bg-gray-100"
       }`}
       onClick={onClick}
