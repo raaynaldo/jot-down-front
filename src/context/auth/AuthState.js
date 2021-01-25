@@ -13,6 +13,7 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   UPDATE_USER,
+  UPDATE_NAME,
 } from "../types";
 
 const AuthState = (props) => {
@@ -102,6 +103,25 @@ const AuthState = (props) => {
     }
   };
 
+  const updateName = async (formData) => {
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const res = await axios.post("/update_name", formData, config);
+      dispatch({
+        type: UPDATE_NAME,
+        payload: res.data.user,
+      });
+    } catch (error) {
+      // dispatch({
+      //   type: LOGIN_FAIL,
+      //   payload: error.response.data.errors,
+      // });
+    }
+  };
+
   // Logout
   const logout = () => dispatch({ type: LOGOUT });
 
@@ -123,6 +143,7 @@ const AuthState = (props) => {
         logout,
         clearErrors,
         updateUser,
+        updateName,
       }}
     >
       {props.children}

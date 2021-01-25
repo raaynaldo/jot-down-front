@@ -7,3 +7,4 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_NAME = "UPDATE_NAME";
