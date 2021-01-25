@@ -25,6 +25,7 @@ const InputFolderName = ({ active, setDeactive, initialValue, onSave }) => {
         onBlur={handler}
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        autoFocus
       />
     </>
   ) : null;

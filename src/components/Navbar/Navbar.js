@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import Avatar from "react-avatar";
 import "./Navbar.css";
 
 const Navbar = (props) => {
@@ -32,13 +33,22 @@ const Navbar = (props) => {
             aria-label="toggle profile dropdown"
           >
             <div
-              className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full"
+              // className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full"
+              className="border-2 border-gray-400 rounded-full"
               onMouseEnter={() => setActive(true)}
             >
-              <img
-                src="https://lh3.googleusercontent.com/a-/AOh14Gi0DgItGDTATTFV6lPiVrqtja6RZ_qrY91zg42o-g"
+              {/* <img
+                src={user.picture}
                 className="object-cover w-full h-full"
                 alt="avatar"
+              /> */}
+              <Avatar
+                src={user.picture}
+                name={user.full_name}
+                maxInitials={2}
+                round={true}
+                size="30"
+                className="flex-shrink-0"
               />
             </div>
           </button>

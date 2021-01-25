@@ -2,7 +2,6 @@ const ModalYesNo = ({ onClose, handler }) => {
   return (
     <div
       className="fixed bottom-0 left-0 z-50 flex items-center justify-center w-full h-full bg-gray-800 bg-opacity-50"
-      onClick={onClose}
     >
       <div className="w-1/3 bg-white rounded-lg">
         <div className="flex flex-col items-start p-4 space-y-3">
