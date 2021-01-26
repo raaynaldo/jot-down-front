@@ -18,7 +18,12 @@ const TagList = () => {
   if (isLoading) {
     return (
       <>
-        <Loader type="ThreeDots" color="#ccc" height={5} />
+        <Loader
+          type="ThreeDots"
+          color="#d1fae5"
+          height={15}
+          className="flex items-center justify-center"
+        />
       </>
     );
   }

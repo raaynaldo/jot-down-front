@@ -30,11 +30,8 @@ const AddNote = () => {
   };
 
   return (
-    <div>
-      <FaPencilAlt
-        className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none"
-        onClick={handleClick}
-      />
+    <div onClick={handleClick} id="create-note-btn">
+      <FaPencilAlt className="transform cursor-pointer hover:scale-110 motion-reduce:transform-none" />
     </div>
   );
 };

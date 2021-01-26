@@ -10,7 +10,7 @@ const NoteSideBar = () => {
   return (
     <div
       className={`w-64 z-10  transition-all ml-0  ${
-        opened ? "ml-40" : ""
+        opened ? "ml-52" : ""
       } bg-gray-200 flex flex-col pt-4`}
     >
       <div className="flex flex-row items-center space-x-2 ">

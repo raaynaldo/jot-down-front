@@ -43,6 +43,10 @@ const Tags = (props) => {
         onChange={tagsChangeHandler}
         maxTags={5}
         onlyUnique={true}
+        inputProps={{
+          className: "react-tagsinput-input",
+          placeholder: "Add a tag",
+        }}
       />
     </div>
   );

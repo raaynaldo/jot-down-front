@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import MainContext from "../../../context/main/mainContext";
 import { useContextMenu } from "react-contexify";
 import { FOLDER_TYPES } from "../../../constant";
+import { FaPencilAlt } from "react-icons/fa";
 import removeMd from "remove-markdown";
 
 const NoteList = () => {
@@ -43,7 +44,12 @@ const NoteList = () => {
   if (isLoading) {
     return (
       <>
-        <Loader type="ThreeDots" color="#ccc" height={5} />
+        <Loader
+          type="ThreeDots"
+          color="#d1fae5"
+          height={15}
+          className="flex items-center justify-center h-full"
+        />
       </>
     );
   }
@@ -51,6 +57,17 @@ const NoteList = () => {
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+
+  // if (data?.length === 0) {
+  //   return (
+  //     <button
+  //       type="submit"
+  //       className="w-full px-4 py-2 tracking-wide text-white bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+  //     >
+  //       Add a note
+  //     </button>
+  //   );
+  // }
 
   const ContextMenuHandler = (e, id) => {
     clickHandler(id);
@@ -72,25 +89,42 @@ const NoteList = () => {
     }
   };
 
+  const addANoteHandler = () => {
+    document.getElementById("create-note-btn").click();
+  };
+
   // console.log(searchKeyNote);
   return (
     <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
-      {data
-        ?.filter((note) =>
-          removeMd(note.body)
-            .toLowerCase()
-            .includes(searchKeyNote.toLowerCase())
-        )
-        .map((note) => (
-          <Note
-            key={note.id}
-            id={note.id}
-            title={note.title}
-            body={note.body}
-            onClick={() => clickHandler(note.id)}
-            onContextMenu={(e) => ContextMenuHandler(e, note.id)}
-          />
-        ))}
+      {data?.length > 0 ? (
+        data
+          ?.filter((note) =>
+            removeMd(note.body)
+              .toLowerCase()
+              .includes(searchKeyNote.toLowerCase())
+          )
+          .map((note) => (
+            <Note
+              key={note.id}
+              id={note.id}
+              title={note.title}
+              body={note.body}
+              onClick={() => clickHandler(note.id)}
+              onContextMenu={(e) => ContextMenuHandler(e, note.id)}
+            />
+          ))
+      ) : (
+        <div className="flex flex-col items-center w-full">
+          <button
+            type="submit"
+            className="flex items-center justify-between w-1/2 px-4 py-2 text-sm tracking-wide text-white bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+            onClick={() => addANoteHandler()}
+          >
+            <FaPencilAlt />
+            <span>Add a note</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

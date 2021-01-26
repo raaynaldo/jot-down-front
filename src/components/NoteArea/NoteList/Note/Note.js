@@ -14,7 +14,7 @@ const Note = ({ id, title, body, onClick, onContextMenu }) => {
       ? "No Title"
       : titleSlice + (titleSlice.length === maxSizeTitle ? "..." : "");
 
-  const maxSizeBody = 70;
+  const maxSizeBody = 65;
   const findSpace = body.indexOf("\n");
   const newBody = findSpace !== -1 ? body.slice(findSpace) : "";
   const bodyRemoveMd = removeMd(newBody);
