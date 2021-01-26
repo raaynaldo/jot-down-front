@@ -12,8 +12,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
-  UPDATE_USER,
   UPDATE_NAME,
+  UPDATE_PICTURE,
 } from "../types";
 
 const AuthState = (props) => {
@@ -84,16 +84,16 @@ const AuthState = (props) => {
     }
   };
 
-  const updateUser = async (formData) => {
+  const updateName = async (formData) => {
     const config = {
       "Content-Type": "application/json",
     };
 
     try {
-      const res = await axios.post("/upload_image", formData, config);
+      const res = await axios.patch("/update_name", formData, config);
       dispatch({
-        type: UPDATE_USER,
-        payload: res.data.image,
+        type: UPDATE_NAME,
+        payload: res.data.user,
       });
     } catch (error) {
       // dispatch({
@@ -103,16 +103,17 @@ const AuthState = (props) => {
     }
   };
 
-  const updateName = async (formData) => {
+  const updatePicture = async (formData) => {
     const config = {
       "Content-Type": "application/json",
     };
 
     try {
-      const res = await axios.post("/update_name", formData, config);
+      const res = await axios.patch("/update_picture", formData, config);
+      console.log(res)
       dispatch({
-        type: UPDATE_NAME,
-        payload: res.data.user,
+        type: UPDATE_PICTURE,
+        payload: res.data.picture,
       });
     } catch (error) {
       // dispatch({
@@ -142,8 +143,8 @@ const AuthState = (props) => {
         login,
         logout,
         clearErrors,
-        updateUser,
         updateName,
+        updatePicture,
       }}
     >
       {props.children}

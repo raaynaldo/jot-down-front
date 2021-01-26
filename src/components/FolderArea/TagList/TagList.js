@@ -28,7 +28,7 @@ const TagList = () => {
   }
 
   return (
-    <div id="TagList" className="space-y-2">
+    <div id="TagList" className="pb-16 space-y-2">
       {data.map((tag) => (
         <Tag
           key={tag.id}

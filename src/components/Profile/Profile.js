@@ -2,7 +2,8 @@ import { useContext } from "react";
 import AuthContext from "../../context/auth/authContext";
 import FullNameSection from "./FullNameSection/FullNameSection";
 import AccountPictureSection from "./AccountPictureSection/AccountPictureSection";
-import Avatar from "react-avatar";
+// import Avatar from "react-avatar";
+import Avatar from "../shared/Avatar/Avatar";
 // import PasswordSection from "./PasswordSection/PasswordSection";
 
 const Profile = () => {
@@ -19,13 +20,18 @@ const Profile = () => {
               alt="avatar"
             />
           </div> */}
-          <Avatar
+          {/* <Avatar
             src={user.picture}
             name={user.full_name}
             maxInitials={2}
             round={true}
             size="70"
             className="flex-shrink-0"
+          /> */}
+          <Avatar
+            src={user.picture}
+            alt={user.full_name}
+            className="flex-shrink-0 w-24 h-24"
           />
           <div className="flex-shrink-1">
             <p className="text-2xl font-bold">{user.full_name}</p>

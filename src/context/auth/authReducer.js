@@ -7,8 +7,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
-  UPDATE_USER,
   UPDATE_NAME,
+  UPDATE_PICTURE,
 } from "../types";
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -58,15 +58,15 @@ const authReducer = (state, action) => {
         error: null,
         validation: {},
       };
-    case UPDATE_USER:
-      return {
-        ...state,
-        user: { ...state.user, image: action.payload },
-      };
     case UPDATE_NAME:
       return {
         ...state,
         user: action.payload,
+      };
+    case UPDATE_PICTURE:
+      return {
+        ...state,
+        user: { ...state.user, picture: action.payload },
       };
     default:
       return state;

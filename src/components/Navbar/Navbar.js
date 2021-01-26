@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
-import Avatar from "react-avatar";
+// import Avatar from "react-avatar";
+import Avatar from '../shared/Avatar/Avatar'
 import "./Navbar.css";
 
 const Navbar = (props) => {
@@ -42,13 +43,18 @@ const Navbar = (props) => {
                 className="object-cover w-full h-full"
                 alt="avatar"
               /> */}
-              <Avatar
+              {/* <Avatar
                 src={user.picture}
                 name={user.full_name}
                 maxInitials={2}
                 round={true}
                 size="30"
                 className="flex-shrink-0"
+              /> */}
+              <Avatar
+                src={user.picture}
+                alt={user.full_name}
+                className="w-8 h-8"
               />
             </div>
           </button>
