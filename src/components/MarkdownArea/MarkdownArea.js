@@ -4,6 +4,7 @@ import MainContext from "../../context/main/mainContext";
 import { getNote, saveNote } from "../../api";
 import Loader from "react-loader-spinner";
 import MDEditor from "@uiw/react-md-editor";
+import { FOLDER_TYPES } from "../../constant";
 import { FaCheckCircle } from "react-icons/fa";
 import "./MarkdownArea.css";
 import Tags from "./Tags/Tags";
@@ -13,7 +14,7 @@ function MarkdownArea() {
   const {
     activeNote,
     // updateActiveNote,
-    // activeFolder,
+    activeFolder,
     noteListQueryKey,
   } = useContext(MainContext);
   const { data, error, isLoading: isLoadingQuery, isError } = useQuery(
@@ -28,12 +29,20 @@ function MarkdownArea() {
     }
   );
 
-  useEffect(() => {
-    console.log("Component did change", value);
-    return () => {
-      console.log("Component will unmount", value);
-    };
-  }, [activeNote]);
+  // useEffect(() => {
+  //   // if (value !== "") console.log("Component did change", value);
+  //   if (activeNote.id !== 0 && value !== "") console.log(value, activeNote.id);
+  //   return () => {
+  //     if (activeNote.id !== 0 && value !== "") console.log(value, activeNote.id);
+  //     // console.log(data.body);
+  //     // console.log(value);
+  //     // if (activeNote.id !== 0 && value !== data.body) console.log("Component will unmount", value);
+  //   };
+  // }, [activeNote]);
+
+  // useEffect(() => {
+  //   if (data !== undefined) console.log(data);
+  // }, [data]);
 
   const [time, setTime] = useState(null);
   const [saved, setSaved] = useState(false);
@@ -54,7 +63,7 @@ function MarkdownArea() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(noteListQueryKey);
-        setTimeout(() => setSaved(false), 3000);
+        setTimeout(() => setSaved(false), 1000);
       },
     }
   );
@@ -83,12 +92,17 @@ function MarkdownArea() {
     return <span>Error: {error.message}</span>;
   }
 
+  const isFolderOrTags = (type) => {
+    return type === FOLDER_TYPES.folder || type === FOLDER_TYPES.tag;
+  };
+
   return activeNote.id !== 0 ? (
     <div className="flex-auto">
       <Tags
         tags={data.tags.map((tag) => tag.name)}
         data={data}
         noteId={activeNote.id}
+        disabled={!isFolderOrTags(activeFolder.type)}
       />
       <div className="relative Container">
         <MDEditor
@@ -96,7 +110,8 @@ function MarkdownArea() {
           onChange={handleChange}
           visiableDragbar={false}
           autoFocus={false}
-          // preview={"preview"}
+          preview={isFolderOrTags(activeFolder.type) ? "live" : "preview"}
+          hideToolbar={!isFolderOrTags(activeFolder.type)}
         />
         {saved ? (
           <div className="absolute z-50 flex flex-row items-center space-x-1.5 top-1 right-5">

@@ -9,7 +9,6 @@ import "./Tags.css";
 const Tags = (props) => {
   const [tags, setTags] = useState([]);
   useEffect(() => {
-    console.log("ganti");
     setTags(props.data.tags.map((tag) => tag.name));
   }, [props.data]);
 
@@ -47,6 +46,7 @@ const Tags = (props) => {
           className: "react-tagsinput-input",
           placeholder: "Add a tag",
         }}
+        disabled={props.disabled}
       />
     </div>
   );
