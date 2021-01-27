@@ -12,7 +12,7 @@ const MainProvider = (props) => {
   const [activeNote, setActiveNote] = useState({
     id: 0,
     active: false,
-    dataLoaded: false,
+    // dataLoaded: false,
   });
   const [noteListQueryKey, setNoteListQueryKey] = useState([]);
   const [searchKeyNote, setSearchKeyNote] = useState("");

@@ -84,7 +84,7 @@ const NoteList = () => {
       updateActiveNote({
         id: id,
         active: true,
-        dataLoaded: false,
+        // dataLoaded: false,
       });
     }
   };
@@ -96,7 +96,7 @@ const NoteList = () => {
   // console.log(searchKeyNote);
   return (
     <div className="w-64 h-full mt-4 space-y-2 overflow-y-auto">
-      {data?.length > 0 ? (
+      {data?.length > 0 || activeFolder.type !== FOLDER_TYPES.folder ? (
         data
           ?.filter((note) =>
             removeMd(note.body)

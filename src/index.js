@@ -17,7 +17,7 @@ ReactDOM.render(
     <AuthState>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <App />
+          <App/>
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

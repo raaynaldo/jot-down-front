@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient, QueryCache } from "react-query";
 import { Menu, Item, Separator, Submenu } from "react-contexify";
 import { FOLDER_TYPES } from "../../constant";
 import {
@@ -30,12 +30,17 @@ const ContextMenu = () => {
   const archiveHandler = async ({ props, data }) => {
     const isArchive = data === "archive";
     await archiveMutateAsync({ id: props.id, archive: isArchive });
+    // const queryCache = new QueryCache();
+    // const qc = queryCache.find(noteListQueryKey);
+    // console.log(qc);
+    queryClient.invalidateQueries("tags");
     afterHandling();
   };
 
   const deleteHandler = async ({ props, data }) => {
     const isdelete = data === "delete";
     await deleteMutateAsync({ id: props.id, delete: isdelete });
+    queryClient.invalidateQueries("tags");
     afterHandling();
   };
 
@@ -46,7 +51,7 @@ const ContextMenu = () => {
 
   const deletePermanentlyHandler = async ({ props }) => {
     await deletePermanentlyMutateAsync({ id: props.id });
-    queryClient.invalidateQueries("tags")
+    queryClient.invalidateQueries("tags");
     afterHandling();
   };
 

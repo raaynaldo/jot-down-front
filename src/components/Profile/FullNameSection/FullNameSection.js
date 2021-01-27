@@ -14,7 +14,7 @@ const FullNameSection = () => {
     setLastName(user.last_name);
   }, [user.last_name]);
 
-  const { register, handleSubmit, errors, setError } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     updateName(data);
     setActive(false);

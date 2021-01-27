@@ -67,11 +67,13 @@ const FolderList = () => {
           onClick={() => setNewFolderActive(true)}
         />
       </div>
-      <InputFolderName
-        active={newFolderActive}
-        setDeactive={() => setNewFolderActive(false)}
-        onSave={addNewFolderHanlder}
-      />
+      {newFolderActive ? (
+        <InputFolderName
+          active={newFolderActive}
+          setDeactive={() => setNewFolderActive(false)}
+          onSave={addNewFolderHanlder}
+        />
+      ) : null}
       {data?.map((folder, idx) => (
         <Folder
           key={idx}
@@ -90,7 +92,8 @@ const FolderList = () => {
               activeFolder.type !== FOLDER_TYPES.folder
             ) {
               updateActiveFolder({ id: folder.id, type: FOLDER_TYPES.folder });
-              updateActiveNote({ id: 0, active: false, dataLoaded: false });
+              // updateActiveNote({ id: 0, active: false, dataLoaded: false });
+              updateActiveNote({ id: 0, active: false });
             }
           }}
         />
@@ -107,7 +110,8 @@ const FolderList = () => {
               id: 0,
               type: FOLDER_TYPES.archived,
             });
-            updateActiveNote({ id: 0, active: false, dataLoaded: false });
+            // updateActiveNote({ id: 0, active: false, dataLoaded: false });
+            updateActiveNote({ id: 0, active: false });
           }
         }}
       >
@@ -123,7 +127,8 @@ const FolderList = () => {
               id: 0,
               type: FOLDER_TYPES.trash,
             });
-            updateActiveNote({ id: 0, active: false, dataLoaded: false });
+            // updateActiveNote({ id: 0, active: false, dataLoaded: false });
+            updateActiveNote({ id: 0, active: false });
           }
         }}
       >

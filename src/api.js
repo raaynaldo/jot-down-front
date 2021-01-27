@@ -146,7 +146,6 @@ export const updateFolder = async (data) => {
     const config = {
       "Content-Type": "application/json",
     };
-    console.log(data);
     const response = await axios.patch("/update_folder", data, config);
     return response.data.note;
   } catch (error) {
@@ -156,7 +155,6 @@ export const updateFolder = async (data) => {
 
 export const deleteFolder = async (data) => {
   try {
-    console.log(data);
     const response = await axios.delete("/delete_folder/" + data.id);
     return response.data.note;
   } catch (error) {

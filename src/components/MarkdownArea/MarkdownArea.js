@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import MainContext from "../../context/main/mainContext";
 import { getNote, saveNote } from "../../api";
@@ -27,6 +27,13 @@ function MarkdownArea() {
       },
     }
   );
+
+  useEffect(() => {
+    console.log("Component did change", value);
+    return () => {
+      console.log("Component will unmount", value);
+    };
+  }, [activeNote]);
 
   const [time, setTime] = useState(null);
   const [saved, setSaved] = useState(false);
@@ -89,6 +96,7 @@ function MarkdownArea() {
           onChange={handleChange}
           visiableDragbar={false}
           autoFocus={false}
+          // preview={"preview"}
         />
         {saved ? (
           <div className="absolute z-50 flex flex-row items-center space-x-1.5 top-1 right-5">

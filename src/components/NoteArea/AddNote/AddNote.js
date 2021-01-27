@@ -25,7 +25,7 @@ const AddNote = () => {
     updateActiveNote({
       id: res.id,
       active: true,
-      dataLoaded: false,
+      // dataLoaded: false,
     });
   };
 

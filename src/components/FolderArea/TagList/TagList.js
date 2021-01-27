@@ -49,7 +49,8 @@ const TagList = () => {
               activeFolder.type !== FOLDER_TYPES.tag
             ) {
               updateActiveFolder({ id: tag.id, type: FOLDER_TYPES.tag });
-              updateActiveNote({ id: 0, active: false, dataLoaded: false });
+              // updateActiveNote({ id: 0, active: false, dataLoaded: false });
+              updateActiveNote({ id: 0, active: false });
             }
           }}
         />

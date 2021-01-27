@@ -14,6 +14,7 @@ const Folder = ({ id, name, onClick, active, updateActiveFolder }) => {
     props: {
       setEditNameOn: () => setEditName(true),
       deleteFolder: () => deleteFolderConfirmation(),
+      folderName: name,
     },
   });
 
@@ -34,7 +35,6 @@ const Folder = ({ id, name, onClick, active, updateActiveFolder }) => {
   //delete folder
   const { mutateAsync: deleteMutateAsync } = useMutation(deleteFolder);
   const deleteFolderHandler = async () => {
-    console.log("yoo");
     await deleteMutateAsync({ id: id });
     await queryClient.invalidateQueries("folders");
     // updateActiveFolder({ id: id });

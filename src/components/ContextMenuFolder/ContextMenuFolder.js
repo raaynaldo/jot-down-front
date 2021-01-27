@@ -10,10 +10,18 @@ const ContextMenuFolder = () => {
     props.deleteFolder();
   };
 
+  const isItemDisabled = ({ props }) => {
+    return props.folderName === "Main";
+  };
+
   return (
     <Menu id="FolderContextMenu">
-      <Item onClick={renameHandler}>Rename</Item>
-      <Item onClick={deleteHandler}>Delete</Item>
+      <Item onClick={renameHandler} disabled={isItemDisabled}>
+        Rename
+      </Item>
+      <Item onClick={deleteHandler} disabled={isItemDisabled}>
+        Delete
+      </Item>
     </Menu>
   );
 };
