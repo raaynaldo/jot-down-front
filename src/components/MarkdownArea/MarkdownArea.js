@@ -110,8 +110,8 @@ function MarkdownArea() {
           onChange={handleChange}
           visiableDragbar={false}
           autoFocus={false}
-          preview={isFolderOrTags(activeFolder.type) ? "live" : "preview"}
-          hideToolbar={!isFolderOrTags(activeFolder.type)}
+          // preview={isFolderOrTags(activeFolder.type) ? "live" : "preview"}
+          // hideToolbar={!isFolderOrTags(activeFolder.type)}
         />
         {saved ? (
           <div className="absolute z-50 flex flex-row items-center space-x-1.5 top-1 right-5">

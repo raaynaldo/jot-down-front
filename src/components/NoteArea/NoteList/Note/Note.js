@@ -20,7 +20,9 @@ const Note = ({ id, title, body, onClick, onContextMenu }) => {
   const bodyRemoveMd = removeMd(newBody);
   let startBodySlice = 0;
   if (searchKeyNote !== "") {
-    startBodySlice = bodyRemoveMd.toLocaleLowerCase().indexOf(searchKeyNote);
+    startBodySlice = bodyRemoveMd
+      .toLowerCase()
+      .indexOf(searchKeyNote.toLowerCase());
     startBodySlice =
       startBodySlice < 5 && startBodySlice >= 0 ? 0 : startBodySlice - 5;
   }
