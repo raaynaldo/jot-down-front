@@ -4,18 +4,20 @@ import { useForm } from "react-hook-form";
 import AuthContext from "../../context/auth/authContext";
 
 const Login = (props) => {
-  const { login, isAuthenticated, validation } = useContext(
-    AuthContext
-  );
+  const {
+    login,
+    isAuthenticated,
+    validation,
+    clearErrors: clearErrorsAuth,
+  } = useContext(AuthContext);
 
-  useEffect(() => {
-    // clearErrors();
-    if (isAuthenticated) {
-      props.history.push("/");
-    }
-  }, [isAuthenticated, props.history]);
-
-  const { register, handleSubmit, errors, setError } = useForm();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setError,
+    clearErrors: clearErrorsForm,
+  } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     login({ user: data });
@@ -30,6 +32,14 @@ const Login = (props) => {
       });
     });
   }, [validation]);
+
+  useEffect(() => {
+    clearErrorsAuth();
+    clearErrorsForm();
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+  }, [isAuthenticated, props.history]);
 
   return (
     // <div className="flex items-center h-screen">

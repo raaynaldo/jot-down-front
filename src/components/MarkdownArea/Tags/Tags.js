@@ -8,6 +8,7 @@ import "./Tags.css";
 
 const Tags = (props) => {
   const [tags, setTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
   useEffect(() => {
     setTags(props.data.tags.map((tag) => tag.name));
   }, [props.data]);
@@ -30,18 +31,28 @@ const Tags = (props) => {
     if (updatedTags.length > tags.length) {
       addMutateAsync({ id: props.noteId, name: updatedTag[0] });
     } else {
-      removeMutateAsync({ id: props.noteId, name: updatedTag[0] });
+      removeMutateAsync({
+        id: props.noteId,
+        name: updatedTag[0],
+      });
     }
-    const lowerCaseTags = updatedTags.map((tag) => tag.toLowerCase());
-    setTags(lowerCaseTags);
+    // const lowerCaseTags = updatedTags.map((tag) => tag.toLowerCase());
+    setTags(updatedTags);
   };
+
+  const tagsChangeInputHandler = (value) => {
+    setInputValue(value.toLowerCase());
+  };
+
   return (
     <div>
       <TagsInput
         value={tags}
+        inputValue={inputValue}
         onChange={tagsChangeHandler}
         maxTags={5}
         onlyUnique={true}
+        onChangeInput={tagsChangeInputHandler}
         inputProps={{
           className: "react-tagsinput-input",
           placeholder: "Add a tag",

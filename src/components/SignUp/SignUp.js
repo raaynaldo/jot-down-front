@@ -4,15 +4,18 @@ import { useForm } from "react-hook-form";
 import AuthContext from "../../context/auth/authContext";
 
 const SignUp = (props) => {
-  const { signup, validation, isAuthenticated } = useContext(AuthContext);
+  const { signup, validation, isAuthenticated, clearErrors } = useContext(
+    AuthContext
+  );
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      props.history.push("/");
-    }
-  }, [isAuthenticated, props.history]);
-
-  const { register, handleSubmit, errors, setError, getValues } = useForm();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setError,
+    getValues,
+    clearErrors: clearErrorsForm,
+  } = useForm();
   const onSubmit = (data) => {
     console.log(data);
     signup({ user: data });
@@ -27,6 +30,14 @@ const SignUp = (props) => {
       });
     });
   }, [validation]);
+
+  useEffect(() => {
+    clearErrors();
+    clearErrorsForm();
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+  }, [isAuthenticated, props.history]);
 
   return (
     <div className="w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
