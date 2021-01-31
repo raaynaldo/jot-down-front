@@ -1,7 +1,13 @@
 import axios from "axios";
 
 const instance = () => {
-  axios.defaults.baseURL = `${process.env.REACT_APP_API_SERVER}/api/v1`;
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+    // dev code
+    axios.defaults.baseURL = `${process.env.REACT_APP_API_SERVER_DEVELOPMENT}/api/v1`;
+  } else {
+    // production code
+    axios.defaults.baseURL = `${process.env.REACT_APP_API_SERVER_PRODUCTION}/api/v1`;
+  }
 
   if (false) {
     axios.interceptors.request.use(
